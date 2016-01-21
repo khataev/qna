@@ -13,4 +13,5 @@
 /tmp
 
 config/database.yml
+.overcommit.yml
 .idea
