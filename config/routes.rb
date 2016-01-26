@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+  get 'questions/index'
+
+  get 'answers/index'
+
+  get 'answers/new'
+
+  get 'questions/new'
+
+  get 'answers/new'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -53,4 +63,9 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+  resources :questions, except: [:show] do
+    resources :answers, except: [:update, :destroy, :new]
+  end
+
+  resources :answers, only: [:update, :destroy]
 end

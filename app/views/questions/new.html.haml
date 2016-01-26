@@ -1,0 +1,13 @@
+.row
+  %h1 Create New Question
+  = form_tag questions_path do
+    .col-md-8
+      .form-group
+        = label :question, :title, 'Title'
+        = text_field :question, 'title', placeholder: 'Enter title', class: 'form-control'
+    %br
+    %br
+    .col-md-8
+      = text_area :question, 'body', cols: 92, rows: 15, id: 'question_body', class: 'form-control', placeholder: 'Question contents should be 10 characters minimum'
+      %br
+      = submit_tag 'Post Your Question', class: 'pull-right'

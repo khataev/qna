@@ -1,0 +1,32 @@
+.row
+  .col-md-8
+    %h1
+      = @question.title
+    .question_body
+      = @question.body
+.row
+  .col-md-8
+    - if flash[:notice]
+      .error
+        = flash[:notice]
+.row
+  .col-md-8
+    - if @answers.empty?
+      %p Currently no answers yet
+    - else
+      = "#{pluralize(@answers.count,'Answer')}"
+      %table.table.table-striped
+        - @answers.each do |a|
+          %tr
+            %td
+              .answer_body
+                = a.body
+.row
+  .col-md-8
+    %h2 Post your answer
+    = form_tag do
+      .col-md-8
+        = text_area :answer, 'body', cols: 92, rows: 15, id: 'answer_body', class: 'form-control'
+        %br
+        = submit_tag 'Post Your Answer', class: 'pull-right'
+
