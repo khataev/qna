@@ -12,11 +12,8 @@ class AnswersController < ApplicationController
 
   def create
     @answer = @question.answers.build(answer_params)
-    if @answer.save
-    else
-      # render question_answers_path(@question)
-      flash[:notice] = 'Incorrect answer data. Try again'
-    end
+
+    flash[:notice] = 'Incorrect answer data. Try again' unless @answer.save
 
     redirect_to question_answers_path(@question)
   end
