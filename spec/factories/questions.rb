@@ -2,6 +2,13 @@ FactoryGirl.define do
   factory :question do
     title 'Question Title'
     body 'Question Body'
+    author
+
+    factory :question_with_answers do
+      after(:create) do |question|
+        create_list(:answer, 2, question: question)
+      end
+    end
   end
 
   factory :nil_question, class: 'Question' do

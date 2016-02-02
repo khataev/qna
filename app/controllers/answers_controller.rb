@@ -1,20 +1,29 @@
 # Answers controller
 class AnswersController < ApplicationController
+  before_action :authenticate_user!
   before_action :load_question, only: [:index, :create]
 
   def index
     @answers = @question.answers
   end
 
-  # def new
-  #   @answer = @question.answers.new
-  # end
-
   def create
     @answer = @question.answers.build(answer_params)
+    @answer.author = current_user
 
-    flash[:notice] = 'Incorrect answer data. Try again' unless @answer.save
+    flash[:notice] = if @answer.save
+                       'Answer successfully created.'
+                     else
+                       'Incorrect answer data. Try again'
+                     end
 
+    redirect_to question_answers_path(@question)
+  end
+
+  def destroy
+    @answer = Answer.find(params[:id])
+    @question = @answer.question
+    @answer.destroy
     redirect_to question_answers_path(@question)
   end
 

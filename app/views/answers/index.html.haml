@@ -10,6 +10,9 @@
       .error
         = flash[:notice]
 .row
+  - if current_user == @question.author
+    = link_to 'Delete', @question, method: :delete, data: { confirm: "Are you sure?" }
+.row
   .col-md-8
     - if @answers.empty?
       %p Currently no answers yet
@@ -21,11 +24,15 @@
             %td
               .answer_body
                 = a.body
+            %td
+              - if current_user == a.author
+                = link_to 'Delete Answer', a, method: :delete, data: { confirm: "Are you sure?" }
 .row
   .col-md-8
     %h2 Post your answer
-    = form_tag do
+    = form_tag  do
       .col-md-8
+        = label :answer, :body
         = text_area :answer, 'body', cols: 92, rows: 15, id: 'answer_body', class: 'form-control'
         %br
         = submit_tag 'Post Your Answer', class: 'pull-right'

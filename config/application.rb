@@ -32,7 +32,7 @@ module Qna
                        routing_specs: false,
                        request_specs: false,
                        controller_specs: true
-      g.fixture_replecement :factory_girl, dir: '/spec/factories'
+      g.fixture_replecement :factory_girl, dir: 'spec/factories'
     end
   end
 end

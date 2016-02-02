@@ -16,3 +16,4 @@
 config/database.yml
 .overcommit.yml
 .idea
+.byebug_history
