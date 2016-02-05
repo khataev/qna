@@ -8,4 +8,9 @@ class User < ActiveRecord::Base
   has_many :questions
   has_many :answers
   # validates :password, :password_confirmation, presence: true
+
+  def author_of?(obj)
+    false unless obj.respond_to? :user_id
+    obj.user_id == id
+  end
 end

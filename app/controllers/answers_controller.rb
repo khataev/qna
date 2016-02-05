@@ -1,11 +1,7 @@
 # Answers controller
 class AnswersController < ApplicationController
   before_action :authenticate_user!
-  before_action :load_question, only: [:index, :create]
-
-  def index
-    @answers = @question.answers
-  end
+  before_action :load_question, only: [:create]
 
   def create
     @answer = @question.answers.build(answer_params)
@@ -17,14 +13,18 @@ class AnswersController < ApplicationController
                        'Incorrect answer data. Try again'
                      end
 
-    redirect_to question_answers_path(@question)
+    redirect_to question_path(@question)
   end
 
   def destroy
     @answer = Answer.find(params[:id])
     @question = @answer.question
-    @answer.destroy
-    redirect_to question_answers_path(@question)
+    if current_user.author_of?(@answer)
+      @answer.destroy
+    else
+      flash[:notice] = 'Only author could delete an answer'
+    end
+    redirect_to question_path(@question)
   end
 
   private

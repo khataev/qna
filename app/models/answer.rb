@@ -5,5 +5,5 @@ class Answer < ActiveRecord::Base
 
   validates :body, presence: true, length: { minimum: 10 }
   validates :question_id, presence: true
-  validates :author, presence: true
+  validates :user_id, presence: true
 end

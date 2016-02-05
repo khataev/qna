@@ -1,0 +1,35 @@
+.row
+  .col-md-8
+    %h1
+      = @question.title
+    .question_body
+      = @question.body
+.row
+  - if author_of?(@question)
+    = link_to 'Delete', @question, method: :delete, data: { confirm: "Are you sure?" }
+.row
+  .col-md-8
+    - if @answers.empty?
+      %p Currently no answers yet
+    - else
+      = "#{pluralize(@answers.count,'Answer')}"
+      %table.table.table-striped
+        - @answers.each do |answer|
+          %tr
+            %td
+              .answer_body
+                = answer.body
+            %td
+              - if author_of?(answer)
+                = link_to 'Delete Answer', answer, method: :delete, data: { confirm: "Are you sure?" }
+- if user_signed_in?
+  .row
+    .col-md-8
+      %h2 Post your answer
+      = form_for [@question, Answer.new] do |f|
+        .col-md-8
+          = f.label :body
+          = f.text_area :body, cols: 92, rows: 15, id: 'answer_body', class: 'form-control'
+          %br
+          = f.submit 'Post Your Answer', class: 'pull-right'
+

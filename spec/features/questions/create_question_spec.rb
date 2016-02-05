@@ -18,6 +18,8 @@ feature 'Create question', '
     click_on 'Post Your Question'
 
     expect(page).to have_content 'Your question successfully created.'
+    expect(page).to have_content question.title
+    expect(page).to have_content question.body
   end
 
   scenario 'Unauthenticated user tries to create question' do
