@@ -3,13 +3,9 @@ FactoryGirl.define do
     "Question #{n} Title"
   end
 
-  sequence :body do |n|
-    "Question #{n} Body"
-  end
-
   factory :question do
     title
-    body
+    sequence(:body) { |n| "Question #{n} Body" }
     author
 
     factory :question_with_answers do

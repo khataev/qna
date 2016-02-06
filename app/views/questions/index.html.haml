@@ -8,12 +8,12 @@
       %p Currently no questions yet
     - else
       %table.table.table-striped
-        - @questions.each do |q|
+        - @questions.each do |question|
           %tr
             %td
-              = link_to q.title, question_path(q)
+              = link_to question.title, question
               %br
               .question_body
-              = q.body
+              = question.body
 .row
   %p= link_to 'Ask question', new_question_path

@@ -93,11 +93,6 @@ RSpec.describe QuestionsController, type: :controller do
       expect { delete :destroy, id: question }.to change(Question, :count).by(-1)
     end
 
-    it 'deletes related answers' do
-      delete :destroy, id: question
-      expect(Answer.count(question_id: question.id)).to eq 0
-    end
-
     it 'redirects to #index page' do
       delete :destroy, id: question
       expect(response).to redirect_to questions_path

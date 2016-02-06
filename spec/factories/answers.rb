@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :answer do
-    body 'Answer Body'
+    sequence(:body) { |n| "Answer #{n} body" }
     author
     question
   end

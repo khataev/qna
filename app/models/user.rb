@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   # validates :password, :password_confirmation, presence: true
 
   def author_of?(obj)
-    false unless obj.respond_to? :user_id
+    return false unless obj.respond_to? :user_id
     obj.user_id == id
   end
 end

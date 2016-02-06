@@ -15,7 +15,6 @@ feature 'Delete question', '
     click_on 'Delete'
     expect(current_path).to eq questions_path
     expect(page).to_not have_content(question.title)
-    expect(Question.count(question.id)).to eq 0
   end
 
   scenario "Authenticated user tries to delete another user's question" do

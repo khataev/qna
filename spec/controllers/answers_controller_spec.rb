@@ -14,7 +14,7 @@ RSpec.describe AnswersController, type: :controller do
 
     context 'with valid parameters' do
       it 'saves the valid answer in database' do
-        post :create, question_id: question.id, answer: attributes_for(:answer)
+        # post :create, question_id: question.id, answer: attributes_for(:answer)
         expect { post :create, question_id: question.id, answer: attributes_for(:answer) }.to change(question.answers, :count).by(1)
       end
 
