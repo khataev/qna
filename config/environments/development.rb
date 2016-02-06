@@ -46,7 +46,7 @@ Rails.application.configure do
     Bullet.bullet_logger = true
     Bullet.console = true
     Bullet.rails_logger = true
-    # Bullet.n_plus_one_query_enable = false
+    Bullet.n_plus_one_query_enable = true
   end
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
