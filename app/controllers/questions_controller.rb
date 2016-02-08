@@ -12,10 +12,6 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    # byebug
-    @answers = @question.answers
-    # @answer = @answers.build
-    # @answer = Answer.new(question: @question)
   end
 
   def create
@@ -46,7 +42,6 @@ class QuestionsController < ApplicationController
   end
 
   def load_question
-    # byebug
     @question = Question.find(params[:id])
   end
 end

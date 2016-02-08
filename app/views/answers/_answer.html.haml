@@ -1,0 +1,7 @@
+%tr
+  %td
+    .answer_body
+      = answer.body
+  %td
+    - if author_of?(answer)
+      = link_to 'Delete Answer', answer, method: :delete, data: { confirm: "Are you sure?" }

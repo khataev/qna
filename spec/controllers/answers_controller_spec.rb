@@ -14,13 +14,12 @@ RSpec.describe AnswersController, type: :controller do
 
     context 'with valid parameters' do
       it 'saves the valid answer in database' do
-        # post :create, question_id: question.id, answer: attributes_for(:answer)
-        expect { post :create, question_id: question.id, answer: attributes_for(:answer) }.to change(question.answers, :count).by(1)
+        expect { post :create, question_id: question.id, answer: attributes_for(:answer), format: :js }.to change(question.answers, :count).by(1)
       end
 
-      it 'redirects to question#show view' do
-        post :create, question_id: question.id, answer: attributes_for(:answer)
-        expect(response).to redirect_to question_path(question)
+      it 'renders template create' do
+        post :create, question_id: question.id, answer: attributes_for(:answer), format: :js
+        expect(response).to render_template :create
       end
     end
 
@@ -28,12 +27,12 @@ RSpec.describe AnswersController, type: :controller do
       sign_in_user
 
       it "doesn't save the nil answer in database" do
-        expect { post :create, question_id: question.id, answer: attributes_for(:nil_answer) }.to_not change(Answer, :count)
+        expect { post :create, question_id: question.id, answer: attributes_for(:nil_answer), format: :js }.to_not change(Answer, :count)
       end
 
-      it 'redirects to show view' do
-        post :create, question_id: question.id, answer: attributes_for(:nil_answer)
-        expect(response).to redirect_to question_path(question)
+      it 'renders template create' do
+        post :create, question_id: question.id, answer: attributes_for(:nil_answer), format: :js
+        expect(response).to render_template :create
       end
     end
   end

@@ -6,14 +6,15 @@ class AnswersController < ApplicationController
   def create
     @answer = @question.answers.build(answer_params)
     @answer.author = current_user
-
     flash[:notice] = if @answer.save
                        'Answer successfully created.'
                      else
                        'Incorrect answer data. Try again'
                      end
-
-    redirect_to question_path(@question)
+    respond_to do |format|
+      format.html { redirect_to question_path(@question) }
+      format.js
+    end
   end
 
   def destroy
