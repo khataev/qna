@@ -17,6 +17,10 @@ RSpec.describe AnswersController, type: :controller do
         expect { post :create, question_id: question.id, answer: attributes_for(:answer), format: :js }.to change(question.answers, :count).by(1)
       end
 
+      it 'relate to current user after save' do
+        expect { post :create, question_id: question.id, answer: attributes_for(:answer), format: :js }.to change(@user.answers, :count).by(1)
+      end
+
       it 'renders template create' do
         post :create, question_id: question.id, answer: attributes_for(:answer), format: :js
         expect(response).to render_template :create

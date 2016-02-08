@@ -11,10 +11,6 @@ class AnswersController < ApplicationController
                      else
                        'Incorrect answer data. Try again'
                      end
-    respond_to do |format|
-      format.html { redirect_to question_path(@question) }
-      format.js
-    end
   end
 
   def destroy
