@@ -1,4 +1,4 @@
-require 'rails_helper'
+require 'features/feature_helpers'
 
 feature 'User signs up', '
   In order to be able to ask question

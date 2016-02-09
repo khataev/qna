@@ -1,4 +1,4 @@
-require 'rails_helper'
+require 'features/feature_helpers'
 
 feature 'Delete question', '
   By some reason

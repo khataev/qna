@@ -1,4 +1,4 @@
-require 'rails_helper'
+require 'features/feature_helpers'
 
 feature 'List questions', '
   In order to read questions

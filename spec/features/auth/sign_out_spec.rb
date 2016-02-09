@@ -1,4 +1,4 @@
-require 'rails_helper'
+require 'features/feature_helpers'
 
 feature 'User signs out', '
   In order to sign out the system

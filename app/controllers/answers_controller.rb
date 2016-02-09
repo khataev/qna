@@ -6,11 +6,7 @@ class AnswersController < ApplicationController
   def create
     @answer = @question.answers.build(answer_params)
     @answer.author = current_user
-    flash[:notice] = if @answer.save
-                       'Answer successfully created.'
-                     else
-                       'Incorrect answer data. Try again'
-                     end
+    @answer.save
   end
 
   def destroy

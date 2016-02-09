@@ -52,13 +52,13 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'bullet'
-  gem 'selenium-webdriver'
+  gem 'capybara-webkit'
   gem 'database_cleaner'
 end
 
 group :test do
   gem 'shoulda-matchers'
   gem 'capybara'
-  # Access an IRB console on exception pages or by using <%= console %> in views
+  # Acces an IRB console on exception pages or by using <%= console %> in views
   # gem 'web-console', '~> 2.0'
 end
