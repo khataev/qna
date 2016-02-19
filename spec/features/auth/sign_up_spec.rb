@@ -1,4 +1,4 @@
-require 'features/feature_helpers'
+require 'features/feature_spec_helpers'
 
 feature 'User signs up', '
   In order to be able to ask question

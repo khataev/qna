@@ -6,4 +6,13 @@ class Answer < ActiveRecord::Base
   validates :body, presence: true, length: { minimum: 10 }
   validates :question_id, presence: true
   validates :user_id, presence: true
+
+  default_scope { order(best: :desc).order(created_at: :asc) }
+
+  def make_the_best
+    ActiveRecord::Base.transaction do
+      question.answers.update_all(best: false) unless best?
+      update!(best: best? ? false : true)
+    end
+  end
 end

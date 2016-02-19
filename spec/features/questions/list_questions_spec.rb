@@ -1,4 +1,4 @@
-require 'features/feature_helpers'
+require 'features/feature_spec_helpers'
 
 feature 'List questions', '
   In order to read questions

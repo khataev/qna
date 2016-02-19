@@ -1,0 +1,9 @@
+<% if @question.errors.present? %>
+  errors_div = $('.question-errors');
+  errors_div.html('');
+  <% @question.errors.full_messages.each do |message| %>
+    errors_div.append('<%= j message %>' + '</br>');
+  <% end %>
+<% else %>
+  $('.question-area').html('<%= j render 'question' %>');
+<% end %>

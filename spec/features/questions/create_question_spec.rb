@@ -1,4 +1,4 @@
-require 'features/feature_helpers'
+require 'features/feature_spec_helpers'
 
 feature 'Create question', '
   In order to get answer

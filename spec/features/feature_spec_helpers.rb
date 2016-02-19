@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 RSpec.configure do |config|
-  Capybara.javascript_driver = :webkit
-
   config.include FeatureHelpers, type: :feature
 
   config.use_transactional_fixtures = false
@@ -26,4 +24,13 @@ RSpec.configure do |config|
   config.after(:each) do
     DatabaseCleaner.clean
   end
+end
+
+Capybara.javascript_driver = :webkit
+# Capybara.javascript_driver = :selenium
+Capybara.default_max_wait_time = 5
+Capybara.ignore_hidden_elements = true
+
+Capybara::Webkit.configure do |config|
+  # config.debug = true
 end

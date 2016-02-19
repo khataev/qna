@@ -1,0 +1,11 @@
+<% if @answer.errors.present? %>
+  <% @answer.errors.full_messages.each do |message| %>
+    $('.answer-errors').append('<%= j message %>' + '</br>');
+  <% end %>
+<% else %>
+  $('.answer-errors').html('')
+  div_answer = $("#answer-<%= @answer.id %>")
+  div_answer.html('')
+  div_answer.html('<%= j render @answer %>')
+  /*$('.answers').html('<%# j render 'questions/answers' %>');*/
+<% end %>

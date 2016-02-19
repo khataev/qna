@@ -3,10 +3,9 @@
     $('.answer-errors').append('<%= j message %>' + '</br>');
   <% end %>
 <% else %>
-  <% if @first_answer %>
+  <% if @last_question %>
     $('.answers').html('<%= j render 'questions/answers' %>');
   <% else %>
-    $('.answers-table').append("<div id=answer-<%= @answer.id %>><%= j render @answer %></div>");
-    $('#new-answer-body').val('');
+    $('#answer-' + '<%= @answer.id %>').remove();
   <% end %>
 <% end %>

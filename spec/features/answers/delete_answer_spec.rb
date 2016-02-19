@@ -1,4 +1,4 @@
-require 'features/feature_helpers'
+require 'features/feature_spec_helpers'
 
 feature 'Delete answer', '
   By some reason
@@ -11,11 +11,14 @@ feature 'Delete answer', '
   given(:question) { create(:question, author: question_author) }
   given!(:answer) { create(:answer, question: question, author: answer_author) }
 
-  scenario 'Author of a answer deletes it' do
+  scenario 'Author of a answer deletes it', js: true do
     sign_in(answer_author)
     visit question_path(question)
-    expect(page).to have_link('Delete Answer', href: answer_path(answer))
-    click_on 'Delete Answer'
+
+    expect(page).to have_link('Delete', href: answer_path(answer))
+
+    click_on 'Delete'
+
     expect(page).to have_content 'Currently no answers yet'
     expect(page).to_not have_content answer.body
     expect(current_path).to eq question_path(question)
@@ -24,11 +27,13 @@ feature 'Delete answer', '
   scenario "Authenticated user tries to delete another user's answer" do
     sign_in(another_user)
     visit question_path(question)
-    expect(page).to_not have_link('Delete Answer', href: answer_path(answer))
+
+    expect(page).to_not have_link('Delete', href: answer_path(answer))
   end
 
   scenario "Non-authenticated user tries to delete another user's answer" do
     visit question_path(question)
-    expect(page).to_not have_link('Delete Answer', href: answer_path(answer))
+
+    expect(page).to_not have_link('Delete', href: answer_path(answer))
   end
 end

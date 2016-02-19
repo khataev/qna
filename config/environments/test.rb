@@ -46,7 +46,10 @@ Rails.application.configure do
     Bullet.raise = true # raise an error if n+1 query occurs
     Bullet.n_plus_one_query_enable = true
   end
+
+  # config.logger = Logger.new(STDOUT)
+  # config.log_level = :debug
 end
 
 # Rails.logger = Logger.new(STDOUT)
-# Rails.logger.level = 0
+# Rails.logger.level = 2

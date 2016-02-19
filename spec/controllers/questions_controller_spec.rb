@@ -82,6 +82,33 @@ RSpec.describe QuestionsController, type: :controller do
     end
   end
 
+  describe 'PATCH update' do
+    let(:question) { create(:question, author: user) }
+    let(:new_question) { build(:question, title: 'new question title', body: 'new question body') }
+
+    before do
+      sign_in(user)
+      patch :update, id: question, question: attributes_for(:question, title: new_question.title, body: new_question.body), format: :js
+    end
+
+    it 'assigns question to @question' do
+      # patch :update, id: question, question: attributes_for(:question, title: new_question.title, body: new_question.body)
+      expect(assigns(:question)).to eq question
+    end
+
+    it 'changes question attributes' do
+      # patch :update, id: question, question: attributes_for(:new_question)
+      question.reload
+      expect(question.title).to eq new_question.title
+      expect(question.body).to eq new_question.body
+    end
+
+    it 're-renders question' do
+      # patch :update, id: question, question: attributes_for(:new_question)
+      expect(response).to render_template(:update)
+    end
+  end
+
   describe 'DELETE #destroy question by its author' do
     let(:question) { create(:question) }
 
