@@ -30,6 +30,7 @@ Capybara.javascript_driver = :webkit
 # Capybara.javascript_driver = :selenium
 Capybara.default_max_wait_time = 5
 Capybara.ignore_hidden_elements = true
+Capybara.server_port = 1234
 
 Capybara::Webkit.configure do |config|
   # config.debug = true

@@ -82,86 +82,90 @@ RSpec.describe QuestionsController, type: :controller do
     end
   end
 
-  describe 'PATCH update by author' do
-    let(:question) { create(:question, author: user) }
-    let(:new_question) { build(:question, title: 'new question title', body: 'new question body') }
+  describe 'PATCH #update question' do
+    describe 'by author' do
+      let(:question) { create(:question, author: user) }
+      let(:new_question) { build(:question, title: 'new question title', body: 'new question body') }
 
-    before do
-      sign_in(user)
-      patch :update, id: question, question: attributes_for(:question, title: new_question.title, body: new_question.body), format: :js
+      before do
+        sign_in(user)
+        patch :update, id: question, question: attributes_for(:question, title: new_question.title, body: new_question.body), format: :js
+      end
+
+      it 'assigns question to @question' do
+        expect(assigns(:question)).to eq question
+      end
+
+      it 'changes question attributes' do
+        question.reload
+        expect(question.title).to eq new_question.title
+        expect(question.body).to eq new_question.body
+      end
+
+      it 're-renders question' do
+        expect(response).to render_template(:update)
+      end
     end
 
-    it 'assigns question to @question' do
-      expect(assigns(:question)).to eq question
-    end
+    describe 'by someone else' do
+      let(:question) { create(:question) }
+      let(:new_question) { build(:question, title: 'new question title', body: 'new question body') }
 
-    it 'changes question attributes' do
-      question.reload
-      expect(question.title).to eq new_question.title
-      expect(question.body).to eq new_question.body
-    end
+      before do
+        sign_in(user)
+        patch :update, id: question, question: attributes_for(:question, title: new_question.title, body: new_question.body), format: :js
+      end
 
-    it 're-renders question' do
-      expect(response).to render_template(:update)
-    end
-  end
+      it 'could not update question' do
+        old_title = question.title
+        old_body = question.body
+        old_updated_at = question.updated_at
 
-  describe 'PATCH update by someone else' do
-    let(:question) { create(:question) }
-    let(:new_question) { build(:question, title: 'new question title', body: 'new question body') }
+        patch :update, id: question, question: attributes_for(:question, title: 'new valid title', body: 'new valid body'), format: :js
+        question.reload
 
-    before do
-      sign_in(user)
-      patch :update, id: question, question: attributes_for(:question, title: new_question.title, body: new_question.body), format: :js
-    end
-
-    it 'could not update question' do
-      old_title = question.title
-      old_body = question.body
-      old_updated_at = question.updated_at
-
-      patch :update, id: question, question: attributes_for(:question, title: 'new valid title', body: 'new valid body'), format: :js
-      question.reload
-
-      expect(question.title).to eq old_title
-      expect(question.body).to eq old_body
-      expect(question.updated_at).to eq old_updated_at
-    end
-  end
-
-  describe 'DELETE #destroy question by its author' do
-    let(:question) { create(:question) }
-
-    before do
-      sign_in(question.author)
-    end
-
-    it 'deletes the question' do
-      expect { delete :destroy, id: question }.to change(Question, :count).by(-1)
-    end
-
-    it 'redirects to #index page' do
-      delete :destroy, id: question
-      expect(response).to redirect_to questions_path
+        expect(question.title).to eq old_title
+        expect(question.body).to eq old_body
+        expect(question.updated_at).to eq old_updated_at
+      end
     end
   end
 
-  describe 'DELETE #destroy question by someone else' do
-    let(:question) { create(:question) }
+  describe 'DELETE #destroy question' do
+    describe 'by its author' do
+      let(:question) { create(:question) }
 
-    before do
-      sign_in(user)
-      question
+      before do
+        sign_in(question.author)
+      end
+
+      it 'deletes the question' do
+        expect { delete :destroy, id: question }.to change(Question, :count).by(-1)
+      end
+
+      it 'redirects to #index page' do
+        delete :destroy, id: question
+        expect(response).to redirect_to questions_path
+      end
     end
 
-    it 'could not delete the question' do
-      expect { delete :destroy, id: question }.to_not change(Question, :count)
-    end
+    describe 'by someone else' do
+      let(:question) { create(:question) }
 
-    it 'redirects to #index page' do
-      delete :destroy, id: question
-      expect(response).to redirect_to question_path(question)
-      expect(controller).to set_flash[:notice].to('Only author could delete a question')
+      before do
+        sign_in(user)
+        question
+      end
+
+      it 'could not delete the question' do
+        expect { delete :destroy, id: question }.to_not change(Question, :count)
+      end
+
+      it 'redirects to #index page' do
+        delete :destroy, id: question
+        expect(response).to redirect_to question_path(question)
+        expect(controller).to set_flash[:notice].to('Only author could delete a question')
+      end
     end
   end
 end

@@ -48,7 +48,7 @@ feature 'Best answer', '
       end
 
       scenario 'sees the chosen answer as the best', js: true do
-        expect(answer_div(@best_answer_id)).to have_selector('.best-answer')
+        expect(answer_div(@best_answer_id)[:class]).to eq 'best-answer'
       end
 
       scenario 'sees appropriate link', js: true do
@@ -66,9 +66,11 @@ feature 'Best answer', '
 
       scenario 'and reassigns the best to another answer', js: true do
         new_best_answer_id = choose_another_best_answer(question, @best_answer_id)
-
-        expect(answer_div(@best_answer_id)).to_not have_selector('.best-answer')
-        expect(answer_div(new_best_answer_id)).to have_selector('.best-answer')
+        sleep(1)
+        # expect(answer_div(@best_answer_id)).to_not have_selector('.best-answer')
+        # expect(answer_div(new_best_answer_id)).to have_selector('.best-answer')
+        expect(answer_div(@best_answer_id)[:class]).to_not eq 'best-answer'
+        expect(answer_div(new_best_answer_id)[:class]).to eq 'best-answer'
       end
     end
   end

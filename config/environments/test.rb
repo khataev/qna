@@ -21,7 +21,7 @@ Rails.application.configure do
   config.action_controller.perform_caching = false
 
   # Raise exceptions instead of rendering exception templates.
-  config.action_dispatch.show_exceptions = false
+  config.action_dispatch.show_exceptions = ENV['LOG'] == '1'
 
   # Disable request forgery protection in test environment.
   config.action_controller.allow_forgery_protection = false
@@ -40,6 +40,15 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
+  config.before_configuration do
+    env_file = File.join(Rails.root, 'config', 'test_env.yml')
+    if File.exist?(env_file)
+      YAML.load(File.open(env_file)).each do |key, value|
+        ENV[key.to_s] = value
+      end
+    end
+  end
+
   config.after_initialize do
     Bullet.enable = true
     Bullet.bullet_logger = true
@@ -47,9 +56,6 @@ Rails.application.configure do
     Bullet.n_plus_one_query_enable = true
   end
 
-  # config.logger = Logger.new(STDOUT)
-  # config.log_level = :debug
+  config.log_level = :debug
+  config.logger = Logger.new(STDOUT) if ENV['LOG'] == '1'
 end
-
-# Rails.logger = Logger.new(STDOUT)
-# Rails.logger.level = 2
