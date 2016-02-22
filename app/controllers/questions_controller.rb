@@ -26,7 +26,11 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    @question.update(question_params)
+    if current_user.author_of?(@question)
+      @question.update(question_params)
+    else
+      flash[:notice] = 'Only author could edit a question'
+    end
   end
 
   def destroy

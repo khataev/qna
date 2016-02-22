@@ -1,19 +1,13 @@
 .row.question-area
-  = render 'question'
+  = render @question
 .row
   .col-md-8
     .answers
-      = render 'answers'
+      = render 'answers/answer_list'
 
 - if user_signed_in?
   .row
     .col-md-8
-      %h2 Post your answer
-      = form_for [@question, Answer.new], remote: true do |f|
-        .col-md-8
-          = f.label :body, 'Your answer', for: 'new-answer-body'
-          .answer-errors
-          = f.text_area :body, cols: 92, rows: 15, id: 'new-answer-body', class: 'form-control'
-          %br
-          = f.submit 'Post Your Answer', class: 'pull-right'
+      = render 'form'
+
 

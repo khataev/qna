@@ -59,6 +59,10 @@ feature 'Edit answer', '
 
         expect(page).not_to have_selector 'textarea#answer_body'
       end
+
+      within '.answers-table' do
+        expect(page).to have_selector("#answer-#{answer.id}", count: 1)
+      end
     end
 
     scenario 'tries to edit another user answer', js: true do

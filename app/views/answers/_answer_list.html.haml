@@ -1,0 +1,5 @@
+= render 'answers/answers_count'
+
+.answers-table
+  - unless @question.answers.empty?
+    = render @question.answers

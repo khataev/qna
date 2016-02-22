@@ -3,9 +3,6 @@
     $('.answer-errors').append('<%= j message %>' + '</br>');
   <% end %>
 <% else %>
-  <% if @last_question %>
-    $('.answers').html('<%= j render 'questions/answers' %>');
-  <% else %>
-    $('#answer-' + '<%= @answer.id %>').remove();
-  <% end %>
+  $('#answers-count').replaceWith('<%= j render 'answers/answers_count' %>');
+  $('#answer-' + '<%= @answer.id %>').remove();
 <% end %>

@@ -1,15 +1,15 @@
 .col-md-8
   %h1
-    = @question.title
+    = question.title
   .question_body
-    = @question.body
+    = question.body
 
-  - if author_of?(@question)
+  - if author_of?(question)
     = link_to 'Edit', '', class: 'edit-question-link'
-    = link_to 'Delete', @question, method: :delete, data: { confirm: "Are you sure?" }
+    = link_to 'Delete', question, method: :delete, data: { confirm: "Are you sure?" }
 
     %p
-      = form_for @question, remote: true, html: {id: 'edit-question-form'} do |f|
+      = form_for question, remote: true, html: {id: 'edit-question-form'} do |f|
         .question-errors
         = f.label :title, 'Title'
         = f.text_field :title

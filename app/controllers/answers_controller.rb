@@ -5,21 +5,23 @@ class AnswersController < ApplicationController
   before_action :load_answer, only: [:update, :destroy, :set_best]
 
   def create
-    @first_answer = @question.answers.count == 0
     @answer = @question.answers.build(answer_params)
     @answer.author = current_user
     @answer.save
   end
 
   def update
-    @answer.update(answer_params)
-    @question = @answer.question
+    if current_user.author_of?(@answer)
+      @answer.update(answer_params)
+      @question = @answer.question
+    else
+      flash[:notice] = 'Only author could edit answer'
+    end
   end
 
   def destroy
     @question = @answer.question
     if current_user.author_of?(@answer)
-      @last_question = @question.answers.count == 1
       @answer.destroy
     else
       flash[:notice] = 'Only author could delete an answer'
@@ -27,9 +29,12 @@ class AnswersController < ApplicationController
   end
 
   def set_best
-    return unless current_user.author_of?(@answer.question)
-    @answer.make_the_best
-    @question = @answer.question
+    if current_user.author_of?(@answer.question)
+      @answer.make_the_best
+      @question = @answer.question
+    else
+      flash[:notice] = 'Only author of question could make answer the best'
+    end
   end
 
   private

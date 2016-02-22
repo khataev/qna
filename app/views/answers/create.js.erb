@@ -3,10 +3,6 @@
     $('.answer-errors').append('<%= j message %>' + '</br>');
   <% end %>
 <% else %>
-  <% if @first_answer %>
-    $('.answers').html('<%= j render 'questions/answers' %>');
-  <% else %>
-    $('.answers-table').append("<div id=answer-<%= @answer.id %>><%= j render @answer %></div>");
-    $('#new-answer-body').val('');
-  <% end %>
+  $('#answers-count').replaceWith('<%= j render 'answers/answers_count' %>');
+  $('.answers-table').append('<%= j render @answer %>');
 <% end %>

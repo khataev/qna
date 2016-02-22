@@ -7,7 +7,7 @@ class Answer < ActiveRecord::Base
   validates :question_id, presence: true
   validates :user_id, presence: true
 
-  default_scope { order(best: :desc).order(created_at: :asc) }
+  default_scope { order(best: :desc, created_at: :asc) }
 
   def make_the_best
     ActiveRecord::Base.transaction do

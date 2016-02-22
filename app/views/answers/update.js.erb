@@ -4,8 +4,6 @@
   <% end %>
 <% else %>
   $('.answer-errors').html('')
-  div_answer = $("#answer-<%= @answer.id %>")
-  div_answer.html('')
-  div_answer.html('<%= j render @answer %>')
-  /*$('.answers').html('<%# j render 'questions/answers' %>');*/
+  div_answer = $("#answer-<%= @answer.id %>");
+  div_answer.replaceWith('<%= j render @answer %>');
 <% end %>

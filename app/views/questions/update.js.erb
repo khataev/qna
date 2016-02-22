@@ -5,5 +5,5 @@
     errors_div.append('<%= j message %>' + '</br>');
   <% end %>
 <% else %>
-  $('.question-area').html('<%= j render 'question' %>');
+  $('.question-area').html('<%= j render @question %>');
 <% end %>

@@ -75,27 +75,44 @@ RSpec.describe AnswersController, type: :controller do
   end
 
   describe 'PATCH #update' do
-    before { sign_in(answer_author) }
+    describe 'Third user' do
+      before { sign_in(user) }
 
-    it 'assigns requested answer to @answer' do
-      patch :update, id: answer, answer: attributes_for(:answer), format: :js
-      expect(assigns(:answer)).to eq answer
+      it 'could not update the answer' do
+        old_body = answer.body
+        old_updated_at = answer.updated_at
+
+        patch :update, id: answer, answer: attributes_for(:answer, body: 'new valid body'), format: :js
+        answer.reload
+
+        expect(answer.body).to eq old_body
+        expect(answer.updated_at).to eq old_updated_at
+      end
     end
 
-    it 'assigns question to @question' do
-      patch :update, id: answer, answer: attributes_for(:answer), format: :js
-      expect(assigns(:question)).to eq answered_question
-    end
+    describe 'Answer author' do
+      before { sign_in(answer_author) }
 
-    it "changes answer's attributes" do
-      patch :update, id: answer, answer: attributes_for(:answer, body: 'new valid body'), format: :js
-      answer.reload
-      expect(answer.body).to eq 'new valid body'
-    end
+      it 'assigns requested answer to @answer' do
+        patch :update, id: answer, answer: attributes_for(:answer), format: :js
+        expect(assigns(:answer)).to eq answer
+      end
 
-    it 'renders update template' do
-      patch :update, id: answer, answer: attributes_for(:answer), format: :js
-      expect(response).to render_template(:update)
+      it 'assigns question to @question' do
+        patch :update, id: answer, answer: attributes_for(:answer), format: :js
+        expect(assigns(:question)).to eq answered_question
+      end
+
+      it "changes answer's attributes" do
+        patch :update, id: answer, answer: attributes_for(:answer, body: 'new valid body'), format: :js
+        answer.reload
+        expect(answer.body).to eq 'new valid body'
+      end
+
+      it 'renders update template' do
+        patch :update, id: answer, answer: attributes_for(:answer), format: :js
+        expect(response).to render_template(:update)
+      end
     end
   end
 
