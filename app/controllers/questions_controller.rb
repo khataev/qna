@@ -53,6 +53,7 @@ class QuestionsController < ApplicationController
   end
 
   def load_question
+    # @question = Question.includes(:attachments, answers: :attachments).find(params[:id])
     @question = Question.find(params[:id])
   end
 end

@@ -34,6 +34,7 @@ class AnswersController < ApplicationController
     if current_user.author_of?(@answer.question)
       @answer.make_the_best
       @question = @answer.question
+      load_answer
     else
       flash[:notice] = 'Only author of question could make answer the best'
     end
@@ -46,6 +47,7 @@ class AnswersController < ApplicationController
   end
 
   def load_answer
+    # @answer = Answer.includes(:attachments, question: [answers: :attachments]).find(params[:id])
     @answer = Answer.find(params[:id])
   end
 

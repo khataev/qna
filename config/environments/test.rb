@@ -49,12 +49,12 @@ Rails.application.configure do
     end
   end
 
-  config.after_initialize do
-    Bullet.enable = true
-    Bullet.bullet_logger = true
-    Bullet.raise = true # raise an error if n+1 query occurs
-    Bullet.n_plus_one_query_enable = true
-  end
+  # config.after_initialize do
+  #   Bullet.enable = true
+  #   Bullet.bullet_logger = true
+  #   Bullet.raise = true # raise an error if n+1 query occurs
+  #   Bullet.n_plus_one_query_enable = true
+  # end
 
   config.log_level = :debug
   config.logger = Logger.new(STDOUT) if ENV['LOG'] == '1'
