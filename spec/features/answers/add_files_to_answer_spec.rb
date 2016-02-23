@@ -13,7 +13,7 @@ feature 'Add files to answer', '
     visit question_path(question)
   end
 
-  scenario 'User adds file when answering question' do
+  scenario 'User adds file when answering question', js: true do
     answer = build :answer
 
     fill_in 'Your answer', with: answer.body

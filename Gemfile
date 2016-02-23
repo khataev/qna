@@ -38,6 +38,7 @@ gem 'bootstrap-sass-extras'
 gem 'devise'
 gem 'launchy'
 gem 'carrierwave'
+gem 'remotipart'
 
 group :development do
   gem 'spring-commands-rspec'

@@ -5,9 +5,11 @@ class AnswersController < ApplicationController
   before_action :load_answer, only: [:update, :destroy, :set_best]
 
   def create
+    # binding.pry
     @answer = @question.answers.build(answer_params)
     @answer.author = current_user
     @answer.save
+    # binding.pry
   end
 
   def update
@@ -48,6 +50,6 @@ class AnswersController < ApplicationController
   end
 
   def answer_params
-    params.require(:answer).permit(:body)
+    params.require(:answer).permit(:body, attachments_attributes: [:file])
   end
 end

@@ -1,5 +1,5 @@
 #answers-count
-  - if @question.answers.empty?
+  - if @question.answers.empty? || @question.answers.count == 0
     Currently no answers yet
   - else
     = "#{pluralize(@question.answers.count,'Answer')}"
