@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe Question, type: :model do
   # associations
   it { should have_many(:answers).dependent(:destroy) }
+  it { should have_many(:attachments).dependent(:destroy) }
   it { should belong_to(:author) }
 
   # validations

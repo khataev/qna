@@ -37,6 +37,7 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'bootstrap-sass-extras'
 gem 'devise'
 gem 'launchy'
+gem 'carrierwave'
 
 group :development do
   gem 'spring-commands-rspec'
