@@ -12,4 +12,7 @@ RSpec.describe Question, type: :model do
   it { should validate_presence_of :user_id }
   it { should validate_length_of(:title).is_at_most(100) }
   it { should validate_length_of(:body).is_at_least(10) }
+
+  # nested attributes
+  it { should accept_nested_attributes_for :attachments }
 end
