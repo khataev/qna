@@ -12,6 +12,7 @@
 !/log/.keep
 /tmp
 /public/assets/*
+/public/uploads
 
 config/database.yml
 config/test_env.yml
