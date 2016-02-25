@@ -39,6 +39,7 @@ gem 'devise'
 gem 'launchy'
 gem 'carrierwave'
 gem 'remotipart'
+gem 'cocoon'
 
 group :development do
   gem 'spring-commands-rspec'

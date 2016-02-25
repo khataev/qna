@@ -5,9 +5,5 @@
     .answer-errors
     = f.text_area :body, cols: 92, rows: 15, id: 'new-answer-body', class: 'form-control'
     %br
-    %p Attachments:
-    %p
-      = f.fields_for :attachments do |a|
-        = a.label :file
-        = a.file_field :file
+    = render partial: 'attachments/form', locals: { f: f }
     = f.submit 'Post Your Answer', class: 'pull-right'
