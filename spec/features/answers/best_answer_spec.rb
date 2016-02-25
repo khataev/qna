@@ -66,6 +66,7 @@ feature 'Best answer', '
 
       scenario 'and reassigns the best to another answer', js: true do
         new_best_answer_id = choose_another_best_answer(question, @best_answer_id)
+        sleep(1) # intentional delay
         # expect(answer_div(@best_answer_id)).to_not have_selector('.best-answer')
         # expect(answer_div(new_best_answer_id)).to have_selector('.best-answer')
         expect(answer_div(@best_answer_id)[:class]).to_not eq 'best-answer'
