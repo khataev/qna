@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   end
 
   resources :answers, only: [:update, :destroy]
+  resources :attachments, only: [:destroy]
 end

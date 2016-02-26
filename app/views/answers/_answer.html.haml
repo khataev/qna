@@ -2,10 +2,8 @@
   %div{ id: "answer-#{answer.id}", class: (answer.best? ? 'best-answer' : nil)  }
     .answer_body
       = answer.body
-    .attachments
-      %ul
-        - answer.attachments.each do |a|
-          %li= link_to a.file.filename, a.file.url
+    = render 'attachments/attachments', object: answer
+
     .answer_links
       %ul
       - if author_of?(@question)

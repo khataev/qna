@@ -3,10 +3,7 @@
     = question.title
   .question_body
     = question.body
-  .attachments
-    %ul
-      - @question.attachments.each do |a|
-        %li= link_to a.file.filename, a.file.url
+  = render 'attachments/attachments', object: @question
 
   - if author_of?(question)
     = link_to 'Edit', '', class: 'edit-question-link'

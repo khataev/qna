@@ -13,6 +13,18 @@ FactoryGirl.define do
         create_list(:answer, 5, question: question)
       end
     end
+
+    factory :question_with_file do
+      after(:create) do |question|
+        create(:attachment, attachmentable: question)
+      end
+    end
+
+    factory :question_with_file_attached_to_answer do
+      after(:create) do |question|
+        create(:answer_with_file, question: question, author: question.author)
+      end
+    end
   end
 
   factory :nil_question, class: 'Question' do

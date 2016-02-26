@@ -1,0 +1,6 @@
+.attachments
+  %ul
+    - object.attachments.each do |a|
+      %li
+        %p= link_to a.file.filename, a.file.url
+        %p= link_to 'Delete', a, method: :delete, data: { confirm: "Are you sure?" }
