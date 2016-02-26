@@ -16,7 +16,7 @@ FactoryGirl.define do
 
     factory :question_with_file do
       after(:create) do |question|
-        create(:attachment, attachmentable: question)
+        create(:attachment, attachable: question)
       end
     end
 

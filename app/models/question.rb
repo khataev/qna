@@ -1,7 +1,7 @@
 # Model for Question
 class Question < ActiveRecord::Base
   has_many :answers, dependent: :destroy
-  has_many :attachments, dependent: :destroy, as: :attachmentable
+  has_many :attachments, dependent: :destroy, as: :attachable
   belongs_to :author, class_name: 'User', foreign_key: 'user_id'
 
   validates :title, presence: true, length: { maximum: 100 }

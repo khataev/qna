@@ -1,6 +1,6 @@
 # Model for Answer
 class Answer < ActiveRecord::Base
-  has_many :attachments, dependent: :destroy, as: :attachmentable
+  has_many :attachments, dependent: :destroy, as: :attachable
   belongs_to :question
   belongs_to :author, class_name: 'User', foreign_key: 'user_id'
 
