@@ -2,7 +2,7 @@
   %div{ id: "answer-#{answer.id}", class: (answer.best? ? 'best-answer' : nil)  }
     .answer_body
       = answer.body
-    = render 'attachments/attachments', object: answer
+    = render 'attachments/attachments', attachable: answer
 
     .answer_links
       %ul

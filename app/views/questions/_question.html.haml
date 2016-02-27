@@ -3,7 +3,7 @@
     = question.title
   .question_body
     = question.body
-  = render 'attachments/attachments', object: @question
+  = render 'attachments/attachments', attachable: @question
 
   - if author_of?(question)
     = link_to 'Edit', '', class: 'edit-question-link'
