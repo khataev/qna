@@ -1,21 +1,7 @@
 .col-md-8
   %h1
     = question.title
-  .vote-area
-    .vote-errors
-    .vote-up
-      - if user_signed_in?
-        = link_to 'Vote for', vote_for_question_path(question), method: :patch, remote: true, id: 'link-vote-for', data: { hide: @question.voted_by?(current_user) }
-      -#.glyphicon.glyphicon-triangle-top
-    .vote-counter
-      = @question.rating
-    .vote-back
-      - if user_signed_in?
-        = link_to 'Vote back', vote_back_question_path(question), method: :patch, remote: true, id: 'link-vote-back', data: { hide: !@question.voted_by?(current_user) }
-    .vote-down
-      - if user_signed_in?
-        = link_to 'Vote against', vote_against_question_path(question), method: :patch, remote: true, id: 'link-vote-against', data: { hide: @question.voted_by?(current_user) }
-      -#.glyphicon.glyphicon-triangle-bottom
+  = render 'votables/votable', votable: @question
   .question_body
     = question.body
   = render 'attachments/attachments', attachable: @question

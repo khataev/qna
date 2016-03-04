@@ -1,0 +1,15 @@
+.vote-area
+  .vote-errors
+  .vote-up
+    - if user_signed_in?
+      = link_to 'Vote for', vote_for_votable_path(votable), method: :patch, remote: true, id: 'link-vote-for', data: { hide: votable.voted_by?(current_user) }
+      -#.glyphicon.glyphicon-triangle-top
+  .vote-counter
+    = votable.rating
+  .vote-back
+    - if user_signed_in?
+      = link_to 'Vote back', vote_back_votable_path(votable), method: :patch, remote: true, id: 'link-vote-back', data: { hide: !votable.voted_by?(current_user) }
+  .vote-down
+    - if user_signed_in?
+      = link_to 'Vote against', vote_against_votable_path(votable), method: :patch, remote: true, id: 'link-vote-against', data: { hide: votable.voted_by?(current_user) }
+      -#.glyphicon.glyphicon-triangle-bottom
