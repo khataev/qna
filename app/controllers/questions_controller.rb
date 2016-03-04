@@ -1,7 +1,9 @@
 # Questions controller
 class QuestionsController < ApplicationController
+  include Voted
+
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :load_question, only: [:show, :destroy, :update, :vote_for, :vote_against, :vote_back]
+  before_action :load_question, only: [:show, :destroy, :update]
 
   def index
     @questions = Question.all
@@ -43,33 +45,6 @@ class QuestionsController < ApplicationController
     else
       flash[:notice] = 'Only author could delete a question'
       redirect_to question_path(@question)
-    end
-  end
-
-  def vote_for
-    respond_to do |format|
-      if @question.vote_for(current_user)
-        format.json { render json: @question }
-      else
-        format.json { render json: @question.errors.full_messages, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  def vote_against
-    respond_to do |format|
-      if @question.vote_against(current_user)
-        format.json { render json: @question }
-      else
-        format.json { render json: @question.errors.full_messages, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  def vote_back
-    respond_to do |format|
-      @question.vote_back(current_user)
-      format.json { render json: @question }
     end
   end
 

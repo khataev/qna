@@ -1,8 +1,10 @@
 # Answers controller
 class AnswersController < ApplicationController
+  include Voted
+
   before_action :authenticate_user!
   before_action :load_question, only: [:create]
-  before_action :load_answer, only: [:update, :destroy, :set_best, :vote_for, :vote_against, :vote_back]
+  before_action :load_answer, only: [:update, :destroy, :set_best]
 
   def create
     # binding.pry
@@ -37,33 +39,6 @@ class AnswersController < ApplicationController
       load_answer
     else
       flash[:notice] = 'Only author of question could make answer the best'
-    end
-  end
-
-  def vote_for
-    respond_to do |format|
-      if @answer.vote_for(current_user)
-        format.json { render json: @answer }
-      else
-        format.json { render json: @answer.errors.full_messages, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  def vote_against
-    respond_to do |format|
-      if @answer.vote_against(current_user)
-        format.json { render json: @answer }
-      else
-        format.json { render json: @answer.errors.full_messages, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  def vote_back
-    respond_to do |format|
-      @answer.vote_back(current_user)
-      format.json { render json: @answer }
     end
   end
 
