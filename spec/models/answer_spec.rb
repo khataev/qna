@@ -1,4 +1,4 @@
-require 'rails_helper'
+require_relative 'concerns/votable_spec'
 
 RSpec.describe Answer, type: :model do
   # associations
@@ -52,4 +52,7 @@ RSpec.describe Answer, type: :model do
       expect(Answer.where(question_id: question.id, best: true).count).to eq 1
     end
   end
+
+  # Votable interface
+  it_behaves_like 'votable'
 end

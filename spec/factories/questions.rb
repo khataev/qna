@@ -8,6 +8,10 @@ FactoryGirl.define do
     sequence(:body) { |n| "Question #{n} Body" }
     author
 
+    transient do
+      vote_author :user
+    end
+
     factory :question_with_answers do
       after(:create) do |question|
         create_list(:answer, 5, question: question)
@@ -23,6 +27,18 @@ FactoryGirl.define do
     factory :question_with_file_attached_to_answer do
       after(:create) do |question|
         create(:answer_with_file, question: question, author: question.author)
+      end
+    end
+
+    factory :question_with_positive_vote do
+      after(:create) do |question, evaluator|
+        create(:vote, votable: question, like: true, user: evaluator.vote_author)
+      end
+    end
+
+    factory :question_with_negative_vote do
+      after(:create) do |question, evaluator|
+        create(:vote, votable: question, like: false, user: evaluator.vote_author)
       end
     end
   end

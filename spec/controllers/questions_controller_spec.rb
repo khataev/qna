@@ -176,4 +176,68 @@ RSpec.describe QuestionsController, type: :controller do
       end
     end
   end
+
+  describe 'PATCH #vote_for question' do
+    let!(:question) { create(:question) }
+
+    context 'As an authenticated user' do
+      before { sign_in(user) }
+
+      it 'assigns question to @question' do
+        patch :vote_for, id: question, format: :json
+
+        expect(assigns(:question)).to eq question
+      end
+
+      it 'increments questions rating' do
+        create(:like_vote, votable: question)
+
+        expect { patch :vote_for, id: question, format: :json }.to change(question, :rating).by(1)
+      end
+
+      it 'increments questions rating only once per user' do
+        create(:like_vote, user: user, votable: question)
+
+        expect { patch :vote_for, id: question, format: :json }.to_not change(question, :rating)
+      end
+    end
+
+    context 'As non-authenticated user' do
+      it 'could not vote for question' do
+        expect { patch :vote_for, id: question, format: :json }.to_not change(question, :rating)
+      end
+    end
+  end
+
+  describe 'PATCH #vote_against question' do
+    let!(:question) { create(:question) }
+
+    context 'As an authenticated user' do
+      before { sign_in(user) }
+
+      it 'assigns question to @question' do
+        patch :vote_against, id: question, format: :json
+
+        expect(assigns(:question)).to eq question
+      end
+
+      it 'decrements questions rating' do
+        create(:like_vote, votable: question)
+
+        expect { patch :vote_against, id: question, format: :json }.to change(question, :rating).by(-1)
+      end
+
+      it 'decrements questions rating only once per user' do
+        create(:like_vote, user: user, votable: question)
+
+        expect { patch :vote_against, id: question, format: :json }.to_not change(question, :rating)
+      end
+    end
+
+    context 'As non-authenticated user' do
+      it 'could not vote against question' do
+        expect { patch :vote_against, id: question, format: :json }.to_not change(question, :rating)
+      end
+    end
+  end
 end

@@ -1,9 +1,10 @@
-require 'rails_helper'
+require_relative 'concerns/votable_spec'
 
 RSpec.describe Question, type: :model do
   # associations
   it { should have_many(:answers).dependent(:destroy) }
   it { should have_many(:attachments).dependent(:destroy) }
+  it { should have_many(:votes).dependent(:delete_all) }
   it { should belong_to(:author) }
 
   # validations
@@ -15,4 +16,7 @@ RSpec.describe Question, type: :model do
 
   # nested attributes
   it { should accept_nested_attributes_for :attachments }
+
+  # Votable interface
+  it_behaves_like 'votable'
 end

@@ -1,6 +1,7 @@
 # Model for Answer
 class Answer < ActiveRecord::Base
   include Attachable
+  include Votable
 
   belongs_to :question
   belongs_to :author, class_name: 'User', foreign_key: 'user_id'
