@@ -1,7 +1,8 @@
 .col-md-8
   %h1
     = question.title
-  = render 'votables/votable', votable: @question
+  .question-vote-area
+    = render 'votables/votable', votable: @question
   .question_body
     = question.body
   = render 'attachments/attachments', attachable: @question

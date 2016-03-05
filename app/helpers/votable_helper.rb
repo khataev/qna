@@ -1,7 +1,6 @@
 # Helper for Votable controller
 module VotableHelper
   def vote_for_votable_path(votable)
-    # binding.pry
     polymorphic_path(votable, action: 'vote_for')
     # url_for(id: votable, action: 'vote_for')
     # url_for(controller: controller_name, action: 'vote_for', id: votable)

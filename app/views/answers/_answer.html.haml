@@ -1,5 +1,7 @@
 - if answer.persisted?
   %div{ id: "answer-#{answer.id}", class: (answer.best? ? 'best-answer' : nil)  }
+    .answer-vote-area
+      = render 'votables/votable', votable: answer
     .answer_body
       = answer.body
     = render 'attachments/attachments', attachable: answer

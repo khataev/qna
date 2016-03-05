@@ -11,6 +11,10 @@ ready = ->
     answer_id = $(this).data('answerId')
     $('form#edit-answer-' + answer_id).show()
 
-$(document).ready(ready) # "вешаем" функцию ready на событие document.ready
-$(document).on('page:load', ready)  # "вешаем" функцию ready на событие page:load
-$(document).on('page:update', ready) # "вешаем" функцию ready на событие page:update
+load_votable = ->
+  window.Votable.set_votable_hooks('.answer-vote-area')
+
+$(document).ready(load_votable)
+$(document).ready(ready)
+$(document).on('page:load', ready)
+$(document).on('page:update', ready)
