@@ -1,4 +1,5 @@
-require 'rails_helper'
+# require 'rails_helper'
+require_relative 'concerns/voted_spec'
 
 RSpec.describe AnswersController, type: :controller do
   let(:user) { create(:user) }
@@ -154,63 +155,67 @@ RSpec.describe AnswersController, type: :controller do
     end
   end
 
-  describe 'PATCH #vote_for answer' do
-    context 'As an authenticated user' do
-      before { sign_in(user) }
+  it_behaves_like 'voted'
 
-      it 'assigns answer to @answer' do
-        patch :vote_for, id: answer, format: :json
-
-        expect(assigns(:answer)).to eq answer
-      end
-
-      it 'increments questions rating' do
-        create(:like_vote, votable: answer)
-
-        expect { patch :vote_for, id: answer, format: :json }.to change(answer, :rating).by(1)
-      end
-
-      it 'increments questions rating only once per user' do
-        create(:like_vote, user: user, votable: answer)
-
-        expect { patch :vote_for, id: answer, format: :json }.to_not change(answer, :rating)
-      end
-    end
-
-    context 'As non-authenticated user' do
-      it 'could not vote for question' do
-        expect { patch :vote_for, id: answer, format: :json }.to_not change(answer, :rating)
-      end
-    end
-  end
-
-  describe 'PATCH #vote_against question' do
-    context 'As an authenticated user' do
-      before { sign_in(user) }
-
-      it 'assigns answer to @answer' do
-        patch :vote_against, id: answer, format: :json
-
-        expect(assigns(:answer)).to eq answer
-      end
-
-      it 'decrements questions rating' do
-        create(:like_vote, votable: answer)
-
-        expect { patch :vote_against, id: answer, format: :json }.to change(answer, :rating).by(-1)
-      end
-
-      it 'decrements questions rating only once per user' do
-        create(:like_vote, user: user, votable: answer)
-
-        expect { patch :vote_against, id: answer, format: :json }.to_not change(answer, :rating)
-      end
-    end
-
-    context 'As non-authenticated user' do
-      it 'could not vote against question' do
-        expect { patch :vote_against, id: answer, format: :json }.to_not change(answer, :rating)
-      end
-    end
-  end
+  # region Commented
+  # describe 'PATCH #vote_for answer' do
+  #   context 'As an authenticated user' do
+  #     before { sign_in(user) }
+  #
+  #     it 'assigns answer to @answer' do
+  #       patch :vote_for, id: answer, format: :json
+  #
+  #       expect(assigns(:answer)).to eq answer
+  #     end
+  #
+  #     it 'increments questions rating' do
+  #       create(:like_vote, votable: answer)
+  #
+  #       expect { patch :vote_for, id: answer, format: :json }.to change(answer, :rating).by(1)
+  #     end
+  #
+  #     it 'increments questions rating only once per user' do
+  #       create(:like_vote, user: user, votable: answer)
+  #
+  #       expect { patch :vote_for, id: answer, format: :json }.to_not change(answer, :rating)
+  #     end
+  #   end
+  #
+  #   context 'As non-authenticated user' do
+  #     it 'could not vote for question' do
+  #       expect { patch :vote_for, id: answer, format: :json }.to_not change(answer, :rating)
+  #     end
+  #   end
+  # end
+  #
+  # describe 'PATCH #vote_against question' do
+  #   context 'As an authenticated user' do
+  #     before { sign_in(user) }
+  #
+  #     it 'assigns answer to @answer' do
+  #       patch :vote_against, id: answer, format: :json
+  #
+  #       expect(assigns(:answer)).to eq answer
+  #     end
+  #
+  #     it 'decrements questions rating' do
+  #       create(:like_vote, votable: answer)
+  #
+  #       expect { patch :vote_against, id: answer, format: :json }.to change(answer, :rating).by(-1)
+  #     end
+  #
+  #     it 'decrements questions rating only once per user' do
+  #       create(:like_vote, user: user, votable: answer)
+  #
+  #       expect { patch :vote_against, id: answer, format: :json }.to_not change(answer, :rating)
+  #     end
+  #   end
+  #
+  #   context 'As non-authenticated user' do
+  #     it 'could not vote against question' do
+  #       expect { patch :vote_against, id: answer, format: :json }.to_not change(answer, :rating)
+  #     end
+  #   end
+  # end
+  # endregion
 end
