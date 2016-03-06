@@ -13,22 +13,22 @@ RSpec.shared_examples_for 'votable' do
   # behaviour
   describe 'Rating' do
     it 'counts rating 0' do
-      create_list(:vote, 3, votable: votable, like: true)
-      create_list(:vote, 3, votable: votable, like: false)
+      create_list(:vote, 3, votable: votable, value: true)
+      create_list(:vote, 3, votable: votable, value: false)
 
       expect(votable.rating).to eq 0
     end
 
     it 'counts rating 1' do
-      create_list(:vote, 3, votable: votable, like: true)
-      create_list(:vote, 2, votable: votable, like: false)
+      create_list(:vote, 3, votable: votable, value: true)
+      create_list(:vote, 2, votable: votable, value: false)
 
       expect(votable.rating).to eq 1
     end
 
     it 'counts rating -1' do
-      create_list(:vote, 2, votable: votable, like: true)
-      create_list(:vote, 3, votable: votable, like: false)
+      create_list(:vote, 2, votable: votable, value: true)
+      create_list(:vote, 3, votable: votable, value: false)
 
       expect(votable.rating).to eq(-1)
     end

@@ -3,11 +3,11 @@ FactoryGirl.define do
     user
 
     factory :like_vote do
-      like true
+      value true
     end
 
     factory :dislike_vote do
-      like false
+      value false
     end
   end
 end

@@ -12,11 +12,11 @@ module Votable
   end
 
   def likes
-    votes.where(like: true)
+    votes.where(value: true)
   end
 
   def dislikes
-    votes.where(like: false)
+    votes.where(value: false)
   end
 
   def voted_by?(user)
@@ -57,7 +57,7 @@ module Votable
     Vote.where(votable: self, user: user).count > 0
   end
 
-  def vote(user, like)
+  def vote(user, value)
     if author.id == user.id
       errors[:base] << "You can't vote for your #{model_klass_name}"
       false
@@ -65,7 +65,7 @@ module Votable
       errors[:base] << 'You can vote only once'
       false
     else
-      vote = votes.build(user: user, like: like)
+      vote = votes.build(user: user, value: value)
       vote.save!
       true
     end

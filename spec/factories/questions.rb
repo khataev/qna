@@ -32,27 +32,27 @@ FactoryGirl.define do
 
     factory :question_with_positive_vote do
       after(:create) do |question, evaluator|
-        create(:vote, votable: question, like: true, user: evaluator.vote_author)
+        create(:vote, votable: question, value: true, user: evaluator.vote_author)
       end
     end
 
     factory :question_with_negative_vote do
       after(:create) do |question, evaluator|
-        create(:vote, votable: question, like: false, user: evaluator.vote_author)
+        create(:vote, votable: question, value: false, user: evaluator.vote_author)
       end
     end
 
     factory :question_with_answer_with_positive_vote do
       after(:create) do |question, evaluator|
         create(:answer, question: question)
-        create(:vote, votable: question.answers.first, like: true, user: evaluator.vote_author)
+        create(:vote, votable: question.answers.first, value: true, user: evaluator.vote_author)
       end
     end
 
     factory :question_with_answer_with_negative_vote do
       after(:create) do |question, evaluator|
         create(:answer, question: question)
-        create(:vote, votable: question.answers.first, like: false, user: evaluator.vote_author)
+        create(:vote, votable: question.answers.first, value: false, user: evaluator.vote_author)
       end
     end
   end
