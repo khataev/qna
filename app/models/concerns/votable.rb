@@ -3,8 +3,6 @@ module Votable
   extend ActiveSupport::Concern
 
   included do
-    scope :user_votes, -> (user) { where(votable: self, user: user) }
-
     has_many :votes, dependent: :delete_all, as: :votable
   end
 
