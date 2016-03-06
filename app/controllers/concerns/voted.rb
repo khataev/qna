@@ -7,30 +7,24 @@ module Voted
   end
 
   def vote_for
-    respond_to do |format|
-      if votable_variable.vote_for(current_user)
-        format.json { render json: votable_variable }
-      else
-        format.json { render json: votable_variable.errors.full_messages, status: :unprocessable_entity }
-      end
+    if votable_variable.vote_for(current_user)
+      render json: votable_variable
+    else
+      render json: votable_variable.errors.full_messages, status: :unprocessable_entity
     end
   end
 
   def vote_against
-    respond_to do |format|
-      if votable_variable.vote_against(current_user)
-        format.json { render json: votable_variable }
-      else
-        format.json { render json: votable_variable.errors.full_messages, status: :unprocessable_entity }
-      end
+    if votable_variable.vote_against(current_user)
+      render json: votable_variable
+    else
+      render json: votable_variable.errors.full_messages, status: :unprocessable_entity
     end
   end
 
   def vote_back
-    respond_to do |format|
-      votable_variable.vote_back(current_user)
-      format.json { render json: votable_variable }
-    end
+    votable_variable.vote_back(current_user)
+    render json: votable_variable
   end
 
   private
