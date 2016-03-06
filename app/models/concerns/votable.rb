@@ -8,7 +8,8 @@ module Votable
 
   # region Properties
   def rating
-    likes.count - dislikes.count
+    # likes.count - dislikes.count
+    Vote.select('coalesce(sum(CASE value WHEN true THEN 1 ELSE -1 END),0) as rating').where(votable: self).take.rating
   end
 
   def likes
