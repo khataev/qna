@@ -8,8 +8,7 @@ module Votable
 
   # region Properties
   def rating
-    # likes.count - dislikes.count
-    Vote.select('coalesce(sum(CASE value WHEN true THEN 1 ELSE -1 END),0) as rating').where(votable: self).take.rating
+    votes.select('coalesce(sum(CASE value WHEN true THEN 1 ELSE -1 END),0) as rating').take.rating
   end
 
   def likes
@@ -35,7 +34,7 @@ module Votable
   end
 
   def vote_back(user)
-    Vote.delete_all(votable: self, user: user)
+    votes.where(user: user).delete_all
   end
 
   def as_json(options = {})
@@ -55,7 +54,7 @@ module Votable
   end
 
   def user_voted?(user)
-    Vote.where(votable: self, user: user).count > 0
+    votes.where(user: user).exists?
   end
 
   def vote(user, value)
