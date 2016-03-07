@@ -20,7 +20,7 @@ module Votable
   end
 
   def voted_by?(user)
-    votes.where(user: user).count > 0
+    votes.where(user: user).exists?
   end
   # endregion
 
@@ -44,10 +44,6 @@ module Votable
 
   # region Private
   private
-
-  def model_klass
-    self.class
-  end
 
   def model_klass_name
     self.class.to_s
