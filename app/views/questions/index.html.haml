@@ -4,10 +4,13 @@
       %h1 All Questions
 .row
   .col-md-8
-    - if @questions.empty?
-      %p Currently no questions yet
-    - else
-      %table.table.table-striped
+    #questions-count
+      - if @questions.empty? || @questions.count == 0
+        %p Currently no questions yet
+      -else
+        %p = "#{pluralize(@questions.count,'Question')}"
+    %table.table.table-striped.questions-table
+      - if @questions.count > 0
         - @questions.each do |question|
           %tr
             %td
@@ -17,3 +20,5 @@
               = question.body
 .row
   %p= link_to 'Ask question', new_question_path
+
+= subscribe_to '/questions'
