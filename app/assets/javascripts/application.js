@@ -15,6 +15,7 @@
 //= require jquery.remotipart
 //= require jquery.turbolinks
 //= require turbolinks
+//= require private_pub
 //= require votable
 //= require_tree .
 //= require bootstrap-sprockets

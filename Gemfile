@@ -40,6 +40,8 @@ gem 'launchy'
 gem 'carrierwave'
 gem 'remotipart'
 gem 'cocoon'
+gem 'private_pub'
+gem 'thin'
 
 group :development do
   gem 'spring-commands-rspec'

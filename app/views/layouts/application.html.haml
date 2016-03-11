@@ -4,6 +4,8 @@
     %title Qna
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = csrf_meta_tags
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+
   %body
     .user-nav
       - if user_signed_in?
@@ -26,4 +28,4 @@
     / Bootstrap core JavaScript
     / ==================================================
     / Placed at the end of the document so the pages load faster
-    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+

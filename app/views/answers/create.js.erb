@@ -3,6 +3,11 @@
     $('.answer-errors').append('<%= j message %>' + '</br>');
   <% end %>
 <% else %>
-  $('#answers-count').replaceWith('<%= j render 'answers/answers_count' %>');
-  $('.answers-table').append('<%= j render @answer %>');
+  <% publish_to "/questions/#{@question.id}/answers" do %>
+    $('#answers-count').replaceWith('<%= j render 'answers/answers_count' %>');
+    $('.answers-table').append('<%= j render @answer %>');
+  <% end %>
+  $('#new-answer-body').val('');
+
+
 <% end %>

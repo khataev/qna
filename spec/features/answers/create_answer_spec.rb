@@ -43,6 +43,7 @@ feature 'Question answers', "
       within '.answers' do
         expect(page).to have_content answer.body
       end
+      expect(page).to have_field 'Your answer', type: 'textarea', with: ''
       within '#answers-count' do
         expect(page).to have_content('Answer'.pluralize(1))
       end
@@ -60,6 +61,7 @@ feature 'Question answers', "
       within '.answers' do
         expect(page).to have_content answer.body
       end
+      expect(page).to have_field 'Your answer', type: 'textarea', with: ''
       within '#answers-count' do
         expect(page).to have_content("#{cnt + 1} #{'Answer'.pluralize(cnt + 1)}")
       end

@@ -10,4 +10,7 @@
     .col-md-8
       = render 'answers/new_answer_form'
 
+- content_for :javascript
+= subscribe_to "/questions/#{@question.id}/answers"
+
 
