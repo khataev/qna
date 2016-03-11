@@ -8,16 +8,11 @@
       - if @questions.empty? || @questions.count == 0
         %p Currently no questions yet
       -else
-        %p = "#{pluralize(@questions.count,'Question')}"
+        %p= "#{pluralize(@questions.count,'Question')}"
     %table.table.table-striped.questions-table
       - if @questions.count > 0
-        - @questions.each do |question|
-          %tr
-            %td
-              = link_to question.title, question
-              %br
-              .question_body
-              = question.body
+        = render @questions
+
 .row
   %p= link_to 'Ask question', new_question_path
 
