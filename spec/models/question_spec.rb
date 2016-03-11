@@ -1,4 +1,4 @@
-require_relative 'concerns/votable_spec'
+require_relative 'concerns/votable'
 
 RSpec.describe Question, type: :model do
   # associations
