@@ -12,5 +12,4 @@
           .question-comment-errors
           = f.label :body, 'Your Comment'
           = f.text_area :body, cols: 92, rows: 3, class: 'new-comment-body form-control'
-          = hidden_field_tag 'mypar', "123"
           = f.submit 'Post comment'

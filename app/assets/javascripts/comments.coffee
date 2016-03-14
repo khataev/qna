@@ -8,9 +8,6 @@ ready = ->
     $(this).hide()
     owner = $(this).data('owner')
     $("##{owner} .new-comment-form").show()
-    # TODO: wipe out logs
-    console.log(owner)
-    console.log("#{owner} .new-comment-form")
 
 # TODO: zebra tables comments
 
