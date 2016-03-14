@@ -2,10 +2,10 @@
   %h1
     = question.title
   .question-vote-area
-    = render 'votables/votable', votable: @question
+    = render 'votables/votable', votable: question
   .question_body
     = question.body
-  = render 'attachments/attachments', attachable: @question
+  = render 'attachments/attachments', attachable: question
 
   - if author_of?(question)
     = link_to 'Edit', '', class: 'edit-question-link'

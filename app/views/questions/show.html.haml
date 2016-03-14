@@ -1,5 +1,7 @@
-.row.question-area
+.row.question-area{ id: "question-#{@question.id}"}
   = render 'question_show', question: @question
+  .col-md-8
+    = render 'comments/comments', commentable: @question, comment: @comment
 .row
   .col-md-8
     .answers
@@ -10,7 +12,7 @@
     .col-md-8
       = render 'answers/new_answer_form'
 
-- content_for :javascript
 = subscribe_to "/questions/#{@question.id}/answers"
+= subscribe_to "/questions/#{@question.id}/comments"
 
 

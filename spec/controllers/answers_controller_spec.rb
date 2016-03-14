@@ -23,6 +23,11 @@ RSpec.describe AnswersController, type: :controller do
         expect { post :create, question_id: question.id, answer: attributes_for(:answer), format: :js }.to change(@user.answers, :count).by(1)
       end
 
+      # it 'creates empty comment for answer' do
+      #   post :create, question_id: question.id, answer: attributes_for(:answer), format: :js
+      #   expect(assigns(:answer).comments.first).to be_a_new Comment
+      # end
+
       it 'renders template create' do
         post :create, question_id: question.id, answer: attributes_for(:answer), format: :js
         expect(response).to render_template :create
@@ -30,8 +35,6 @@ RSpec.describe AnswersController, type: :controller do
     end
 
     context 'with invalid parameters' do
-      sign_in_user
-
       it "doesn't save the nil answer in database" do
         expect { post :create, question_id: question.id, answer: attributes_for(:nil_answer), format: :js }.to_not change(Answer, :count)
       end

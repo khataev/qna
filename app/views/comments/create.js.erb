@@ -1,0 +1,15 @@
+<% if @comment.errors.present? %>
+  <% @comment.errors.full_messages.each do |message| %>
+  $('.question-comment-errors').append('<%= j message %>' + '</br>');
+  <% end %>
+<% else %>
+  <!-- Find out comments table div for commentable -->
+  <% ownerId = "##{@comment.commentable_type.underscore}-#{@comment.commentable.id}" %>
+  <% commentsTable = "#{ownerId} .comments-table" %>
+  <% publish_to "/#{@comment.commentable_type.pluralize.underscore}/#{@comment.commentable.id}/comments" do %>
+    $('<%= commentsTable %>').append('<%= j render @comment %>');
+  <% end %>
+  $('.new-comment-form').hide();
+  $('.new-comment-link').show();
+  $('.new-comment-body').val('');
+<% end %>

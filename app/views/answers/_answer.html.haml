@@ -18,3 +18,7 @@
             = f.label :body, 'Answer'
             = f.text_area :body
             = f.submit 'Save'
+
+    = render 'comments/comments', commentable: answer #, comment: answer.comments.select{|e| !e.persisted? }.first
+
+  = subscribe_to "/answers/#{answer.id}/comments"
