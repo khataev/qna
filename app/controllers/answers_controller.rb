@@ -7,11 +7,9 @@ class AnswersController < ApplicationController
   before_action :load_answer, only: [:update, :destroy, :set_best]
 
   def create
-    # binding.pry
     @answer = @question.answers.build(answer_params)
     @answer.author = current_user
     @answer.save
-    # binding.pry
   end
 
   def update
