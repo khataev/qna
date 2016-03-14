@@ -26,7 +26,7 @@ class QuestionsController < ApplicationController
     if @question.save
       flash[:notice] = 'Your question successfully created.'
       # for question index listeners
-      PrivatePub.publish_to '/questions', html: render_to_string(@question)
+      PrivatePub.publish_to '/questions', html: h(render_to_string(@question))
       # for current user
       redirect_to question_path(@question)
     else
