@@ -1,4 +1,5 @@
 require_relative 'concerns/votable'
+require_relative 'concerns/commentable'
 
 RSpec.describe Question, type: :model do
   # associations
@@ -19,4 +20,7 @@ RSpec.describe Question, type: :model do
 
   # Votable interface
   it_behaves_like 'votable'
+
+  # Commentable interface
+  it_behaves_like 'commentable'
 end

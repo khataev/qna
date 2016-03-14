@@ -2,6 +2,7 @@
 class Answer < ActiveRecord::Base
   include Attachable
   include Votable
+  include Commentable
 
   belongs_to :question
   belongs_to :author, class_name: 'User', foreign_key: 'user_id'
@@ -15,7 +16,7 @@ class Answer < ActiveRecord::Base
   def make_the_best
     ActiveRecord::Base.transaction do
       question.answers.update_all(best: false) unless best?
-      update!(best: best? ? false : true)
+      update(best: best? ? false : true)
     end
   end
 end
