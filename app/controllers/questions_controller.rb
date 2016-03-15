@@ -1,7 +1,6 @@
 # Questions controller
 class QuestionsController < ApplicationController
   include Voted
-  include ERB::Util
 
   before_action :authenticate_user!, except: [:index, :show]
   before_action :load_question, only: [:show, :destroy, :update]
@@ -26,7 +25,7 @@ class QuestionsController < ApplicationController
     if @question.save
       flash[:notice] = 'Your question successfully created.'
       # for question index listeners
-      PrivatePub.publish_to '/questions', html: h(render_to_string(@question))
+      PrivatePub.publish_to '/questions', question: @question.to_json
       # for current user
       redirect_to question_path(@question)
     else

@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
   before_action :load_commentable, only: :create
 
   def create
-    @comment = @commentable.comments.create(comment_params)
+    @comment = @commentable.comments.new(comment_params)
     @comment.author = current_user
     @comment.save
   end

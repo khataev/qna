@@ -10,7 +10,9 @@ ready = ->
 
   # Subscribing to PrivatePub messages
   PrivatePub.subscribe '/questions', (data, channel) ->
-    $('.questions-table').append(data.html)
+    question = $.parseJSON(data['question'])
+    $('.questions-table').append(JST["questions/create"](question: question))
+#    $('.questions-table').append(data.html)
 
 load_votable = ->
   window.Votable.set_votable_hooks('.question-vote-area')
