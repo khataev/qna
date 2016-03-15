@@ -5,7 +5,7 @@
 .row
   .col-md-8
     #questions-count
-      - if @questions.empty? || @questions.count == 0
+      - if @questions.empty?
         %p Currently no questions yet
       -else
         %p= "#{pluralize(@questions.count,'Question')}"
