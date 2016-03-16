@@ -16,7 +16,7 @@ class Answer < ActiveRecord::Base
   def make_the_best
     ActiveRecord::Base.transaction do
       question.answers.update_all(best: false) unless best?
-      update(best: best? ? false : true)
+      update!(best: best? ? false : true)
     end
   end
 end
