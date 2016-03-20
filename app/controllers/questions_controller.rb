@@ -7,7 +7,6 @@ class QuestionsController < ApplicationController
   before_action :build_answer, only: :show
   after_action  :publish_question, only: :create
 
-  respond_to :html
   respond_to :js, only: :update
 
   def index
