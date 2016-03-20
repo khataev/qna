@@ -9,11 +9,11 @@ class QuestionsController < ApplicationController
   respond_to :html
 
   def index
-    respond_with (@questions = Question.all)
+    respond_with(@questions = Question.all)
   end
 
   def new
-    respond_with (@question = Question.new)
+    respond_with(@question = Question.new)
   end
 
   def show
