@@ -1,7 +1,7 @@
 #attachments
   %p Attachments:
   %p
-    = f.fields_for :attachments do |a|
+    = f.fields_for :attachments, attachable.attachments.build do |a|
       = render 'attachments/attachment_fields', f: a
     .links
       = link_to_add_association 'Add file', f, :attachments, partial: 'attachments/attachment_fields'

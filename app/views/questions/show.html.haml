@@ -10,7 +10,7 @@
 - if user_signed_in?
   .row
     .col-md-8
-      = render 'answers/new_answer_form'
+      = render partial: 'answers/new_answer_form'
 
 = subscribe_to "/questions/#{@question.id}/answers"
 = subscribe_to "/questions/#{@question.id}/comments"

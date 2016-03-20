@@ -4,19 +4,20 @@ class QuestionsController < ApplicationController
 
   before_action :authenticate_user!, except: [:index, :show]
   before_action :load_question, only: [:show, :destroy, :update]
+  before_action :build_answer, only: :show
+
+  respond_to :html
 
   def index
-    @questions = Question.all
+    respond_with (@questions = Question.all)
   end
 
   def new
-    @question = Question.new
-    @question.attachments.build
+    respond_with (@question = Question.new)
   end
 
   def show
-    @answer = @question.answers.build
-    @answer.attachments.build
+    respond_with @question
   end
 
   def create
@@ -60,5 +61,9 @@ class QuestionsController < ApplicationController
   def load_question
     # @question = Question.includes(:attachments, answers: :attachments).find(params[:id])
     @question = Question.find(params[:id])
+  end
+
+  def build_answer
+    @answer = @question.answers.build
   end
 end

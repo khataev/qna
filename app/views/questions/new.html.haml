@@ -10,6 +10,6 @@
     .col-md-8
       = f.label :body
       = f.text_area :body, cols: 92, rows: 15, id: 'question_body', class: 'form-control', placeholder: 'Question contents should be 10 characters minimum'
-      = render partial: 'attachments/form', locals: { f: f }
+      = render partial: 'attachments/form', locals: { f: f, attachable: @question }
       %br
       = f.submit 'Post Your Question', class: 'pull-right'
