@@ -5,28 +5,25 @@ class AnswersController < ApplicationController
   before_action :authenticate_user!
   before_action :load_question, only: [:create]
   before_action :load_answer, only: [:update, :destroy, :set_best]
+  before_action :build_answer, only: :create
+
+  respond_to :js, only: [:create, :update, :destroy]
 
   def create
-    @answer = @question.answers.build(answer_params)
-    @answer.author = current_user
-    @answer.save
+    respond_with(@answer)
   end
 
   def update
-    if current_user.author_of?(@answer)
-      @answer.update(answer_params)
-      @question = @answer.question
-    else
-      flash[:notice] = 'Only author could edit answer'
+    @question = @answer.question
+    respond_with(@answer) do
+      flash[:notice] = 'Only author could edit answer' unless current_user.author_of?(@answer) && @answer.update(answer_params)
     end
   end
 
   def destroy
     @question = @answer.question
-    if current_user.author_of?(@answer)
-      @answer.destroy
-    else
-      flash[:notice] = 'Only author could delete an answer'
+    respond_with(@answer) do
+      flash[:notice] = 'Only author could delete an answer' unless current_user.author_of?(@answer) && @answer.destroy
     end
   end
 
@@ -53,5 +50,9 @@ class AnswersController < ApplicationController
 
   def answer_params
     params.require(:answer).permit(:body, attachments_attributes: [:file])
+  end
+
+  def build_answer
+    @answer = @question.answers.create(answer_params.merge(author: current_user))
   end
 end
