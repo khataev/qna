@@ -43,6 +43,7 @@ gem 'cocoon'
 gem 'private_pub'
 gem 'thin'
 gem 'skim'
+gem 'responders'
 
 group :development do
   gem 'spring-commands-rspec'

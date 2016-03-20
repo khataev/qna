@@ -5,8 +5,10 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :load_question, only: [:show, :destroy, :update]
   before_action :build_answer, only: :show
+  after_action  :publish_question, only: :create
 
   respond_to :html
+  respond_to :js, only: :update
 
   def index
     respond_with(@questions = Question.all)
@@ -21,34 +23,18 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    @question = Question.new(question_params)
-    @question.author = current_user
-    if @question.save
-      flash[:notice] = 'Your question successfully created.'
-      # for question index listeners
-      PrivatePub.publish_to '/questions', question: @question.to_json
-      # for current user
-      redirect_to question_path(@question)
-    else
-      render :new
-    end
+    respond_with(@question = current_user.questions.create(question_params))
   end
 
   def update
-    if current_user.author_of?(@question)
-      @question.update(question_params)
-    else
-      flash[:notice] = 'Only author could edit a question'
+    respond_with(@question) do
+      flash[:notice] = 'Only author could edit a question' unless current_user.author_of?(@question) && @question.update(question_params)
     end
   end
 
   def destroy
-    if current_user.author_of?(@question)
-      @question.destroy
-      redirect_to questions_path
-    else
-      flash[:notice] = 'Only author could delete a question'
-      redirect_to question_path(@question)
+    respond_with(@question) do
+      flash[:notice] = 'Only author could delete a question' unless current_user.author_of?(@question) && @question.destroy
     end
   end
 
@@ -65,5 +51,9 @@ class QuestionsController < ApplicationController
 
   def build_answer
     @answer = @question.answers.build
+  end
+
+  def publish_question
+    PrivatePub.publish_to('/questions', question: @question.to_json) if @question.valid?
   end
 end
