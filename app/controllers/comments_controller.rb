@@ -3,10 +3,10 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!
   before_action :load_commentable, only: :create
 
+  respond_to :js, only: :create
+
   def create
-    @comment = @commentable.comments.new(comment_params)
-    @comment.author = current_user
-    @comment.save
+    respond_with(@comment = @commentable.comments.create(comment_params.merge(author: current_user)))
   end
 
   private
