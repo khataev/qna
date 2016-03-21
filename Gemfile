@@ -44,6 +44,8 @@ gem 'private_pub'
 gem 'thin'
 gem 'skim'
 gem 'responders'
+gem 'omniauth'
+gem 'omniauth-facebook'
 
 group :development do
   gem 'spring-commands-rspec'
