@@ -10,7 +10,7 @@ feature 'User signs up', '
 
   scenario 'Non-registered user tries to sign up' do
     sign_up(user)
-    expect(page).to have_content 'Welcome! You have signed up successfully.'
+    expect(page).to have_content 'A message with a confirmation link has been sent to your email address.'
     expect(current_path).to eq root_path
   end
 

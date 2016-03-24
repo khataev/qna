@@ -1,0 +1,7 @@
+%h2 We need your e-mail
+= form_tag controller: 'omniauth_callbacks', action: 'send_confirmation_email', method: 'post' do
+  = label_tag :email, 'Please enter Your email:'
+  = text_field_tag :email
+  = hidden_field_tag :uid, @uid
+  = hidden_field_tag :provider, @provider
+  = submit_tag 'Proceed'

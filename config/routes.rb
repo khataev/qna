@@ -2,6 +2,10 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: 'omniauth_callbacks' }
   root to: 'questions#index'
 
+  devise_scope :user do
+    post 'omniauth_callbacks/send_confirmation_email'
+  end
+
   concern :votable do
     member do
       patch :vote_for

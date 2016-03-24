@@ -41,6 +41,11 @@ RSpec.describe User, type: :model do
         it 'returns the user' do
           expect(User.find_for_oauth(auth)).to eq user
         end
+
+        it 'resets user confirmation for existed user, if requested' do
+          user = User.find_for_oauth(auth, true)
+          expect(user.confirmed_at).to be_nil
+        end
       end
 
       context 'user does not exist' do

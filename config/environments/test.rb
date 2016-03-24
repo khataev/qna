@@ -58,4 +58,6 @@ Rails.application.configure do
 
   config.log_level = :debug
   config.logger = Logger.new(STDOUT) if ENV['LOG'] == '1'
+
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 end

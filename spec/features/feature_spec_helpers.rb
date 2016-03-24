@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'capybara/email/rspec'
 
 RSpec.configure do |config|
   config.include FeatureHelpers, type: :feature

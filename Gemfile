@@ -46,11 +46,13 @@ gem 'skim'
 gem 'responders'
 gem 'omniauth'
 gem 'omniauth-facebook'
+gem 'omniauth-twitter'
 
 group :development do
   gem 'spring-commands-rspec'
   gem 'fasterer', require: false
   gem 'brakeman', require: false
+  gem 'letter_opener'
 end
 
 group :development, :test do
@@ -67,6 +69,7 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'selenium-webdriver'
   gem 'quiet_assets'
+  gem 'capybara-email'
 end
 
 group :test do
