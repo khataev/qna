@@ -19,14 +19,16 @@ class User < ActiveRecord::Base
     return authorization.user if authorization
 
     email = auth[:email]
+    return nil unless email
+
     user = User.where(email: email).first
 
-    if !user
-      password = Devise.friendly_token[0, 20]
-      user = User.create!(email: email, password: password, password_confirmation: password, confirmed_at: Time.now)
-    else
+    if user
       user.confirmed_at = nil if reset_confirmation
       user.save! if reset_confirmation
+    else
+      password = Devise.friendly_token[0, 20]
+      user = User.create!(email: email, password: password, password_confirmation: password, confirmed_at: Time.now)
     end
     user.create_authorization(auth)
 
