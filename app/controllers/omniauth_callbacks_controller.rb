@@ -29,10 +29,21 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     render 'oauth/send_confirmational_email'
   end
 
+  def after_sign_in_path_for(resource)
+    clear_session
+    super
+  end
+
   private
 
   def store_to_session
     session[:uid] = request.env['omniauth.auth'].uid
     session[:provider] = request.env['omniauth.auth'].provider
+  end
+
+  def clear_session
+    session[:uid] = nil
+    session[:email] = nil
+    session[:provider] = nil
   end
 end
