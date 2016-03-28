@@ -6,6 +6,7 @@ RSpec.shared_examples_for 'voted' do
   let(:votable_sym) { model.to_sym }
   let!(:votable) { create(votable_sym) }
   let(:voter) { create(:user) }
+  let!(:own_votable) { create(votable_sym, author: voter) }
 
   describe 'PATCH #vote_for votable' do
     context 'As an authenticated user' do
@@ -18,9 +19,11 @@ RSpec.shared_examples_for 'voted' do
       end
 
       it 'increments votable rating' do
-        create(:like_vote, votable: votable)
-
         expect { patch :vote_for, id: votable, format: :json }.to change(votable, :rating).by(1)
+      end
+
+      it 'does not increments own votable rating' do
+        expect { patch :vote_for, id: own_votable, format: :json }.to_not change(own_votable, :rating)
       end
 
       it 'increments votable rating only once per user' do
@@ -48,9 +51,11 @@ RSpec.shared_examples_for 'voted' do
       end
 
       it 'decrements votable rating' do
-        create(:like_vote, votable: votable)
-
         expect { patch :vote_against, id: votable, format: :json }.to change(votable, :rating).by(-1)
+      end
+
+      it 'does not decrements own votable rating' do
+        expect { patch :vote_against, id: own_votable, format: :json }.to_not change(own_votable, :rating)
       end
 
       it 'decrements votable rating only once per user' do

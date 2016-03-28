@@ -20,4 +20,20 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  unauthorized:
+    default: 'You are not authorized to access this page.'
+    manage:
+      all: 'Not authorized to %{action} %{subject}.'
+      user: 'Not allowed to manage other user accounts.'
+    update:
+      question: 'Only author could edit a question'
+    destroy:
+      question: 'Only author could delete a question'
+      answer: 'Only author could delete an answer'
+      attachment: 'Only object author could delete its file'
+    set_best:
+      answer: 'Only author of question could make answer the best'
+    vote_for:
+      all: "You can't vote for your %{subject}"
+    vote_against:
+      all: "You can't vote for your %{subject}"

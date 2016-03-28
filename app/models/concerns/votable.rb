@@ -40,6 +40,10 @@ module Votable
   def as_json(options = {})
     super(options.merge(methods: [:rating]))
   end
+
+  def user_voted?(user)
+    votes.where(user: user).exists?
+  end
   # endregion
 
   # region Private
@@ -49,22 +53,13 @@ module Votable
     self.class.to_s
   end
 
-  def user_voted?(user)
-    votes.where(user: user).exists?
-  end
-
   def vote(user, value)
-    if author.id == user.id
-      errors[:base] << "You can't vote for your #{model_klass_name}"
-      false
-    elsif user_voted?(user)
-      errors[:base] << 'You can vote only once'
-      false
-    else
-      vote = votes.build(user: user, value: value)
-      vote.save!
-      true
-    end
+    return false if author.id == user.id
+    return false if user_voted?(user)
+
+    vote = votes.build(user: user, value: value)
+    vote.save!
+    true
   end
   # endregion
 end

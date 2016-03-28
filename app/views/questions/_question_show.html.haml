@@ -7,8 +7,9 @@
     = question.body
   = render 'attachments/attachments', attachable: question
 
-  - if author_of?(question)
+  - if can? :update, question
     = link_to 'Edit', '', class: 'edit-question-link'
+  - if can? :destroy, question
     = link_to 'Delete', question, method: :delete, data: { confirm: "Are you sure?" }
 
     %p

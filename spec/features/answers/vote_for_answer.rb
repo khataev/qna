@@ -128,7 +128,7 @@ feature 'Vote for answer', '
           end
 
           within '.vote-errors' do
-            expect(page).to have_content("You can't vote for your Answer")
+            expect(page).to have_content("You can't vote for your answer")
           end
         end
       end
@@ -146,7 +146,7 @@ feature 'Vote for answer', '
           end
 
           within '.vote-errors' do
-            expect(page).to have_content("You can't vote for your Answer")
+            expect(page).to have_content("You can't vote for your answer")
           end
         end
       end

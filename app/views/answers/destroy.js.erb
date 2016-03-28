@@ -1,8 +1,10 @@
-<% if @answer.errors.present? %>
-  <% @answer.errors.full_messages.each do |message| %>
-    $('.answer-errors').append('<%= j message %>' + '</br>');
+<% if response.status == 200 %>
+  <% if @answer.errors.present? %>
+    <% @answer.errors.full_messages.each do |message| %>
+      $('.answer-errors').append('<%= j message %>' + '</br>');
+    <% end %>
+  <% else %>
+    $('#answers-count').replaceWith('<%= j render 'answers/answers_count' %>');
+    $('#answer-' + '<%= @answer.id %>').remove();
   <% end %>
-<% else %>
-  $('#answers-count').replaceWith('<%= j render 'answers/answers_count' %>');
-  $('#answer-' + '<%= @answer.id %>').remove();
 <% end %>

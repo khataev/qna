@@ -47,6 +47,7 @@ gem 'responders'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
+gem 'cancancan'
 
 group :development do
   gem 'spring-commands-rspec'

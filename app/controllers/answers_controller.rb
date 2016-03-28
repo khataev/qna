@@ -7,6 +7,8 @@ class AnswersController < ApplicationController
   before_action :load_answer, only: [:update, :destroy, :set_best]
   before_action :build_answer, only: :create
 
+  authorize_resource
+
   respond_to :js, only: [:create, :update, :destroy]
 
   def create
@@ -15,26 +17,18 @@ class AnswersController < ApplicationController
 
   def update
     @question = @answer.question
-    respond_with(@answer) do
-      flash[:notice] = 'Only author could edit answer' unless current_user.author_of?(@answer) && @answer.update(answer_params)
-    end
+    respond_with(@answer.update(answer_params))
   end
 
   def destroy
     @question = @answer.question
-    respond_with(@answer) do
-      flash[:notice] = 'Only author could delete an answer' unless current_user.author_of?(@answer) && @answer.destroy
-    end
+    respond_with(@answer.destroy)
   end
 
   def set_best
-    if current_user.author_of?(@answer.question)
-      @answer.make_the_best
-      @question = @answer.question
-      load_answer
-    else
-      flash[:notice] = 'Only author of question could make answer the best'
-    end
+    @question = @answer.question
+    @answer.make_the_best
+    load_answer
   end
 
   private

@@ -26,7 +26,9 @@ feature 'Best answer', '
   describe 'Author of question' do
     before do
       sign_in(user)
+      # binding.pry
       visit question_path(question)
+      # binding.pry
     end
 
     scenario 'sees as many links to make best answer as numbers of questions initially' do
@@ -57,6 +59,7 @@ feature 'Best answer', '
       end
 
       scenario 'and cancels it', js: true do
+        # binding.pry
         cancel_the_best_answer
 
         within '.answers-table' do

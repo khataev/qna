@@ -7,6 +7,8 @@ class QuestionsController < ApplicationController
   before_action :build_answer, only: :show
   after_action  :publish_question, only: :create
 
+  authorize_resource
+
   respond_to :js, only: :update
 
   def index
@@ -26,15 +28,13 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    respond_with(@question) do
-      flash[:notice] = 'Only author could edit a question' unless current_user.author_of?(@question) && @question.update(question_params)
-    end
+    @question.update(question_params)
+    respond_with(@question)
   end
 
   def destroy
-    respond_with(@question) do
-      flash[:notice] = 'Only author could delete a question' unless current_user.author_of?(@question) && @question.destroy
-    end
+    @question.destroy
+    respond_with(@question)
   end
 
   private

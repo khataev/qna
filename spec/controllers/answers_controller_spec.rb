@@ -71,7 +71,7 @@ RSpec.describe AnswersController, type: :controller do
       expect { delete :destroy, id: answer, format: :js }.to_not change(Answer, :count)
     end
 
-    it 'redirects to question#show' do
+    it 'sets flash and renders destroy' do
       delete :destroy, id: answer, format: :js
       expect(response).to render_template :destroy
       expect(controller).to set_flash[:notice].to('Only author could delete an answer')
@@ -154,6 +154,7 @@ RSpec.describe AnswersController, type: :controller do
       it 'does not make answer the best' do
         answer.reload
         expect(answer).to_not be_best
+        expect(controller).to set_flash[:notice].to('Only author of question could make answer the best')
       end
     end
   end

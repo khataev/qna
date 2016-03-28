@@ -61,6 +61,7 @@ GEM
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.9.0)
     byebug (8.2.2)
+    cancancan (1.13.1)
     capybara (2.6.2)
       addressable
       mime-types (>= 1.16)
@@ -348,6 +349,7 @@ DEPENDENCIES
   bootstrap-sass-extras
   brakeman
   bullet
+  cancancan
   capybara
   capybara-email
   capybara-webkit

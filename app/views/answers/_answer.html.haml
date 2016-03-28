@@ -8,10 +8,13 @@
 
     .answer_links
       %ul
-      - if author_of?(@question)
+      - if can? :set_best, answer
         %li= link_to  (answer.best? ? 'Revert' : 'Make the Best'), set_best_answer_path(answer), method: :patch, remote: true
-      - if author_of?(answer)
+
+      - if can? :update, answer
         %li= link_to 'Edit', '', class: 'edit-answer-link', data: { answer_id: answer.id }
+
+      - if can? :destroy, answer
         %li= link_to 'Delete', answer, method: :delete, data: { confirm: "Are you sure?" }, remote: true
         %p
           = form_for answer, remote: true, html: { id: "edit-answer-#{answer.id}" } do |f|
@@ -19,6 +22,6 @@
             = f.text_area :body
             = f.submit 'Save'
 
-    = render 'comments/comments', commentable: answer #, comment: answer.comments.select{|e| !e.persisted? }.first
+    = render 'comments/comments', commentable: answer
 
   = subscribe_to "/answers/#{answer.id}/comments"
