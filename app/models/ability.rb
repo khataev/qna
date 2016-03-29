@@ -27,14 +27,10 @@ class Ability
 
   def as_user(user)
     can :create, [Question, Answer, Comment]
-    can :update, [Question, Answer, Comment], author: user
-    can :destroy, [Question, Answer, Comment], author: user
-    can :destroy, Attachment do |attachment|
-      attachment.attachable.author == user
-    end
-    can :set_best, Answer do |answer|
-      answer.question.author == user
-    end
+    can :update, [Question, Answer, Comment], user_id: user.id
+    can :destroy, [Question, Answer, Comment], user_id: user.id
+    can :destroy, Attachment, attachable: { user_id: user.id }
+    can :set_best, Answer, question: { user_id: user.id }
 
     can_vote(user)
   end
