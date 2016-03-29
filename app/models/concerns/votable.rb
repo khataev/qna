@@ -54,8 +54,7 @@ module Votable
   end
 
   def vote(user, value)
-    return false if author.id == user.id
-    return false if user_voted?(user)
+    return false if author.id == user.id || user_voted?(user)
 
     vote = votes.build(user: user, value: value)
     vote.save!
