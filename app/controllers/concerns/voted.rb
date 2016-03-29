@@ -7,21 +7,13 @@ module Voted
   end
 
   def vote_for
-    if votable_variable.user_voted?(current_user)
-      render json: { errors: 'You can vote only once' }, status: :forbidden
-    else
-      votable_variable.vote_for(current_user)
-      render json: votable_variable
-    end
+    votable_variable.vote_for(current_user)
+    render json: votable_variable
   end
 
   def vote_against
-    if votable_variable.user_voted?(current_user)
-      render json: { errors: 'You can vote only once' }, status: :forbidden
-    else
-      votable_variable.vote_against(current_user)
-      render json: votable_variable
-    end
+    votable_variable.vote_against(current_user)
+    render json: votable_variable
   end
 
   def vote_back
