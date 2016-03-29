@@ -16,9 +16,9 @@ class Ability
   private
 
   def can_vote(user)
-    can :vote_for, [Question, Answer] { |votable| votable.author != user }
-    can :vote_against, [Question, Answer] { |votable| votable.author != user }
-    can :vote_back, [Question, Answer] { |votable| votable.author != user }
+    can :vote_for, [Question, Answer] { |votable| votable.user_id != user.id && !votable.user_voted?(user) }
+    can :vote_against, [Question, Answer] { |votable| votable.user_id != user.id && !votable.user_voted?(user) }
+    can :vote_back, [Question, Answer] { |votable| votable.user_id != user.id && votable.user_voted?(user) }
   end
 
   def as_guest

@@ -29,6 +29,9 @@ describe Ability do
     let(:attachment_of_my_question) { create(:question_with_file, author: user) }
     let(:attachment_of_foreign_question) { create(:question_with_file, author: other_user) }
 
+    let(:voted_question) { create(:question_with_positive_vote, vote_author: user) }
+    let(:voted_answer) { create(:answer_with_positive_vote, vote_author: user) }
+
     # like Guest
     it { should_not be_able_to :manage, :all }
     it { should be_able_to :read, Question }
@@ -71,19 +74,23 @@ describe Ability do
 
     # vote_for
     it { should be_able_to :vote_for, foreign_question }
-    it { should be_able_to :vote_for, foreign_question }
+    it { should be_able_to :vote_for, foreign_answer }
     it { should_not be_able_to :vote_for, my_question }
     it { should_not be_able_to :vote_for, my_answer }
+    it { should_not be_able_to :vote_for, voted_question }
+    it { should_not be_able_to :vote_for, voted_answer }
 
     # vote_against
     it { should be_able_to :vote_against, foreign_question }
-    it { should be_able_to :vote_against, foreign_question }
+    it { should be_able_to :vote_against, foreign_answer }
     it { should_not be_able_to :vote_against, my_question }
     it { should_not be_able_to :vote_against, my_answer }
+    it { should_not be_able_to :vote_against, voted_question }
+    it { should_not be_able_to :vote_against, voted_answer }
 
     # vote_back
-    it { should be_able_to :vote_back, foreign_question }
-    it { should be_able_to :vote_back, foreign_question }
+    it { should be_able_to :vote_back, voted_question }
+    it { should be_able_to :vote_back, voted_answer }
     it { should_not be_able_to :vote_back, my_question }
     it { should_not be_able_to :vote_back, my_answer }
   end

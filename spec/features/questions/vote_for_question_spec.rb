@@ -101,15 +101,7 @@ feature 'Vote for question', '
       visit question_path(question)
 
       within '.vote-area' do
-        click_on('link-vote-for')
-
-        within '.vote-counter' do
-          expect(page).to have_content('0')
-        end
-
-        within '.vote-errors' do
-          expect(page).to have_content("You can't vote for your question")
-        end
+        expect(page).to_not have_link('link-vote-for')
       end
     end
 
@@ -117,20 +109,12 @@ feature 'Vote for question', '
       visit question_path(question)
 
       within '.vote-area' do
-        click_on('link-vote-against')
-
-        within '.vote-counter' do
-          expect(page).to have_content('0')
-        end
-
-        within '.vote-errors' do
-          expect(page).to have_content("You can't vote for your question")
-        end
+        expect(page).to_not have_link('link-vote-against')
       end
     end
   end
 
-  scenario 'Non-authenticated user cannot vote' do
+  scenario 'Non-authenticated user cannot vote', js: true do
     visit question_path(question)
 
     expect(page).to_not have_link('link-vote-for')
