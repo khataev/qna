@@ -28,7 +28,7 @@ class AnswersController < ApplicationController
   def set_best
     @question = @answer.question
     @answer.make_the_best
-    load_answer
+    # load_answer
   end
 
   private

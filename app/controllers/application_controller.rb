@@ -22,10 +22,10 @@ class ApplicationController < ActionController::Base
           redirect_to root_path, notice: exception.message
         end
       end
-      format.json { render json: { errors: exception.message }, status: :unprocessable_entity }
+      format.json { render json: { errors: exception.message }, status: :forbiden }
       format.js do
         flash[:notice] = exception.message
-        render status: :unprocessable_entity
+        render status: :forbidden
       end
     end
   end
