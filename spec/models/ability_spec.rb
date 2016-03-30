@@ -10,6 +10,10 @@ describe Ability do
     it { should be_able_to :read, Question }
     it { should be_able_to :read, Answer }
     it { should be_able_to :read, Comment }
+
+    # API
+    it { should_not be_able_to :me, User }
+    it { should_not be_able_to :all_but_me, User }
   end
 
   describe 'User' do
@@ -93,5 +97,9 @@ describe Ability do
     it { should be_able_to :vote_back, voted_answer }
     it { should_not be_able_to :vote_back, my_question }
     it { should_not be_able_to :vote_back, my_answer }
+
+    # API
+    it { should be_able_to :me, User }
+    it { should be_able_to :all_but_me, User }
   end
 end

@@ -32,6 +32,9 @@ class Ability
     can :destroy, Attachment, attachable: { user_id: user.id }
     can :set_best, Answer, question: { user_id: user.id }
 
+    can :me, User
+    can :all_but_me, User
+
     can_vote(user)
   end
 end
