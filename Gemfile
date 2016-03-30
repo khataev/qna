@@ -77,6 +77,7 @@ end
 group :test do
   gem 'shoulda-matchers'
   gem 'capybara'
+  gem 'json_spec'
   # Acces an IRB console on exception pages or by using <%= console %> in views
   # gem 'web-console', '~> 2.0'
 end
