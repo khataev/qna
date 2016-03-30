@@ -27,4 +27,14 @@ Rails.application.routes.draw do
 
   resources :answers, only: [:update, :destroy]
   resources :attachments, only: [:destroy]
+
+  # API
+  namespace :api do
+    namespace :v1 do
+      resource :profiles do
+        get :me, on: :collection
+        get :all_but_me, on: :collection
+      end
+    end
+  end
 end
