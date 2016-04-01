@@ -19,7 +19,7 @@ describe 'Profiles API' do
       let(:me) { create(:user) }
       let(:access_token) { create(:access_token, resource_owner_id: me.id) }
 
-      before { get '/api/v1/profiles/me', format: :json, access_token: access_token.token }
+      before { get api_path, format: :json, access_token: access_token.token }
 
       it 'returns 201 status' do
         expect(response).to be_success
@@ -47,7 +47,7 @@ describe 'Profiles API' do
         expect(response).to be_unauthorized
       end
       it 'returns 401 status if there is invalid token' do
-        get '/api/v1/profiles/all_but_me', format: :json, access_token: '11111'
+        get api_path, format: :json, access_token: '11111'
         expect(response).to be_unauthorized
       end
     end
