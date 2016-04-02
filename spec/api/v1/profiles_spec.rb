@@ -67,7 +67,7 @@ describe 'Profiles API' do
       it 'returns all users except current user' do
         expect(response.body).to_not include_json(me.to_json)
         User.where.not(id: me).each do |user|
-          expect(response.body).to include_json(user.to_json)
+          expect(response.body).to include_json(user.to_json).at_path('profiles')
         end
       end
     end
