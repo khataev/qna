@@ -8,17 +8,17 @@ module Voted
 
   def vote_for
     votable_variable.vote_for(current_user)
-    render json: votable_variable
+    render json: votable_variable, serializer: VotableSerializer
   end
 
   def vote_against
     votable_variable.vote_against(current_user)
-    render json: votable_variable
+    render json: votable_variable, serializer: VotableSerializer
   end
 
   def vote_back
     votable_variable.vote_back(current_user)
-    render json: votable_variable
+    render json: votable_variable, serializer: VotableSerializer
   end
 
   private
