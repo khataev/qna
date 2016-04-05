@@ -1,6 +1,7 @@
 language: ruby
 services:
   - postgresql
+  - rack
 
 before_script:
   - rackup private_pub.ru -s thin -E production
