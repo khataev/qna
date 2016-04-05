@@ -52,6 +52,12 @@ RSpec.describe QuestionsController, type: :controller do
         expect { post :create, question: attributes_for(:question) }.to change(Question, :count).by(1)
       end
 
+      it 'sends message to PrivatePub queue' do
+        question = attributes_for(:question)
+        expect(PrivatePub).to receive(:publish_to).with('/questions', anything)
+        post :create, question: question
+      end
+
       it 'saved question is associated with user' do
         post :create, question: attributes_for(:question)
         expect(Question.first.user_id).to eq(@user.id)
