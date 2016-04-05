@@ -3,5 +3,6 @@ services:
   - postgresql
 
 before_script:
+  - rackup private_pub.ru -s thin -E production
   - cp config/database.yml.travis config/database.yml
   - psql -c 'create database travis_ci_test;' -U postgres
