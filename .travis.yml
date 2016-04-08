@@ -2,7 +2,14 @@ language: ruby
 services:
   - postgresql
   - rack
-
+script: xvfb-run bundle exec rspec
+addons:
+  apt:
+    sources:
+      - ubuntu-sdk-team
+    packages:
+      - libqt5webkit5-dev
+      - qtdeclarative5-dev
 before_script:
   - bundle exec rackup private_pub.ru -s thin -E production &
   - cp config/database.yml.travis config/database.yml
