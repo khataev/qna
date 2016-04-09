@@ -54,6 +54,7 @@ gem 'oj'
 gem 'oj_mimic_json'
 gem 'sidekiq'
 gem 'sinatra', require: nil
+gem 'whenever'
 
 group :development do
   gem 'spring-commands-rspec'
