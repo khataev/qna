@@ -32,6 +32,11 @@ RSpec.describe AnswersController, type: :controller do
         post :create, question_id: question.id, answer: attributes_for(:answer), format: :js
         expect(response).to render_template :create
       end
+
+      it 'sends notification to author' do
+        expect(QuestionMailer).to receive(:notify_author).and_call_original
+        post :create, question_id: question.id, answer: attributes_for(:answer), format: :js
+      end
     end
 
     context 'with invalid parameters' do
@@ -42,6 +47,11 @@ RSpec.describe AnswersController, type: :controller do
       it 'renders template create' do
         post :create, question_id: question.id, answer: attributes_for(:nil_answer), format: :js
         expect(response).to render_template :create
+      end
+
+      it ' does not send notification to author' do
+        expect(QuestionMailer).to_not receive(:notify_author).and_call_original
+        post :create, question_id: question.id, answer: attributes_for(:nil_answer), format: :js
       end
     end
   end
