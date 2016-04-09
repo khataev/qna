@@ -7,6 +7,10 @@ require 'spec_helper'
 require 'rspec/rails'
 require 'shoulda/matchers'
 require 'cancan/matchers'
+require 'sidekiq/testing'
+
+# Sidekiq::Testing.fake!
+
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # MacrosRequires supporting ruby files with custom matchers and macros, etc, in
@@ -77,3 +81,4 @@ Shoulda::Matchers.configure do |config|
     with.library :rails
   end
 end
+
