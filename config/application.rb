@@ -9,6 +9,8 @@ Bundler.require(*Rails.groups)
 module Qna
   # Global configuration
   class Application < Rails::Application
+    # Sidekiq
+    config.active_job.queue_adapter = :sidekiq
     # Use the responders controller from the responders gem
     config.app_generators.scaffold_controller :responders_controller
 
