@@ -8,6 +8,11 @@ ready = ->
     $(this).hide()
     $('form#edit-question-form').show()
 
+  $('.subscribe-area .subscribe-link')
+    .bind 'ajax:success', subscribe_success
+    .bind 'ajax:error', subscribe_error
+    .bind 'ajax:before', subscribe_before
+
   # Subscribing to PrivatePub messages
   PrivatePub.subscribe '/questions', (data, channel) ->
     question = $.parseJSON(data['question'])
@@ -16,6 +21,20 @@ ready = ->
 
 load_votable = ->
   window.Votable.set_votable_hooks('.question-vote-area')
+
+# subscription
+subscribe_before = ->
+  $('.subscribe-result').html('')
+
+subscribe_success = (e, data, status, xhr) ->
+  subscription = $.parseJSON(xhr.responseText)
+  $('.subscribe-result').html('Subscription successful') if subscription
+  $('.subscribe-link').hide() if subscription
+
+subscribe_error = (e, xhr, status, error)  ->
+  errors = $.parseJSON(xhr.responseText)
+  $.each errors, (index, value) ->
+    $('.vote-result').append(value + '<br/>')
 
 $(document).ready(load_votable)
 $(document).ready(ready)

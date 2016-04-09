@@ -8,6 +8,7 @@ describe Ability do
 
     it { should_not be_able_to :manage, :all }
     it { should be_able_to :read, Question }
+    it { should_not be_able_to :subscribe_on, Question }
     it { should be_able_to :read, Answer }
     it { should be_able_to :read, Comment }
 
@@ -35,6 +36,8 @@ describe Ability do
 
     let(:voted_question) { create(:question_with_positive_vote, vote_author: user) }
     let(:voted_answer) { create(:answer_with_positive_vote, vote_author: user) }
+
+    let(:subscribed_question) { create(:subscribed_question, subscriber: user) }
 
     # like Guest
     it { should_not be_able_to :manage, :all }
@@ -97,6 +100,10 @@ describe Ability do
     it { should be_able_to :vote_back, voted_answer }
     it { should_not be_able_to :vote_back, my_question }
     it { should_not be_able_to :vote_back, my_answer }
+
+    # subscribe
+    it { should be_able_to :subscribe_on, Question }
+    it { should_not be_able_to :subscribe_on, subscribed_question }
 
     # API
     it { should be_able_to :me, User }

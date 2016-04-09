@@ -3,13 +3,14 @@ class QuestionsController < ApplicationController
   include Voted
 
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :load_question, only: [:show, :destroy, :update]
+  before_action :load_question, only: [:show, :destroy, :update, :subscribe_on]
   before_action :build_answer, only: :show
   after_action  :publish_question, only: :create
 
   authorize_resource
 
   respond_to :js, only: :update
+  respond_to :json, only: :subscribe_on
 
   def index
     respond_with(@questions = Question.all)
@@ -35,6 +36,13 @@ class QuestionsController < ApplicationController
   def destroy
     @question.destroy
     respond_with(@question)
+  end
+
+  def subscribe_on
+    @subscription = @question.subscriptions.create(user: current_user)
+    render json: @subscription
+    # TODO: Why this return empty response?
+    # respond_with(@subscription = @question.subscriptions.create(user: current_user))
   end
 
   private

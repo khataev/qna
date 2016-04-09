@@ -5,6 +5,11 @@
     = render 'votables/votable', votable: question
   .question_body
     = question.body
+  .subscribe-area
+    .subscribe-result
+    - if can? :subscribe_on, question
+      = link_to 'Subscribe for updates', subscribe_on_question_path(question), method: :patch, remote: true, data: { type: :json }, class: 'subscribe-link'
+
   = render 'attachments/attachments', attachable: question
 
   - if can? :update, question
