@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   has_many :questions
   has_many :answers
   has_many :authorizations
+  has_many :subscriptions, dependent: :destroy
   # validates :password, :password_confirmation, presence: true
 
   def self.find_for_oauth(auth, reset_confirmation = false)
