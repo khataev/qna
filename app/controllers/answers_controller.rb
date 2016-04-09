@@ -6,7 +6,7 @@ class AnswersController < ApplicationController
   before_action :load_question, only: [:create]
   before_action :load_answer, only: [:update, :destroy, :set_best]
   before_action :build_answer, only: :create
-  after_action  :notify_author, :notify_subscribers, only: :create
+  # after_action  :notify_author, :notify_subscribers, only: :create
 
   authorize_resource
 
@@ -49,13 +49,5 @@ class AnswersController < ApplicationController
 
   def build_answer
     @answer = @question.answers.create(answer_params.merge(author: current_user))
-  end
-
-  def notify_author
-    QuestionMailer.notify_author(@question.author, @answer).deliver_later unless @answer.id.nil?
-  end
-
-  def notify_subscribers
-    QuestionMailer.notify_subscribers(@answer).deliver_later unless @answer.id.nil?
   end
 end

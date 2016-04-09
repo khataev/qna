@@ -54,6 +54,13 @@ RSpec.describe Answer, type: :model do
     end
   end
 
+  describe 'create' do
+    it 'should run QuestionSubscriptionJob after create' do
+      expect(QuestionSubscriptionJob).to receive(:perform_later)
+      create(:answer)
+    end
+  end
+
   # Votable interface
   it_behaves_like 'votable'
 

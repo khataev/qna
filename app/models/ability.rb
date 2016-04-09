@@ -26,7 +26,7 @@ class Ability
   end
 
   def as_user(user)
-    can :create, [Question, Answer, Comment]
+    can :create, [Question, Answer, Comment, Subscription]
     can :update, [Question, Answer, Comment], user_id: user.id
     can :destroy, [Question, Answer, Comment], user_id: user.id
     can :destroy, Attachment, attachable: { user_id: user.id }

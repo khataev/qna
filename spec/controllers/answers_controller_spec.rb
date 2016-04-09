@@ -23,24 +23,9 @@ RSpec.describe AnswersController, type: :controller do
         expect { post :create, question_id: question.id, answer: attributes_for(:answer), format: :js }.to change(@user.answers, :count).by(1)
       end
 
-      # it 'creates empty comment for answer' do
-      #   post :create, question_id: question.id, answer: attributes_for(:answer), format: :js
-      #   expect(assigns(:answer).comments.first).to be_a_new Comment
-      # end
-
       it 'renders template create' do
         post :create, question_id: question.id, answer: attributes_for(:answer), format: :js
         expect(response).to render_template :create
-      end
-
-      it 'sends notification to author' do
-        expect(QuestionMailer).to receive(:notify_author).and_call_original
-        post :create, question_id: question.id, answer: attributes_for(:answer), format: :js
-      end
-
-      it 'sends notification to subscribers' do
-        expect(QuestionMailer).to receive(:notify_subscribers).and_call_original
-        post :create, question_id: question.id, answer: attributes_for(:answer), format: :js
       end
     end
 
@@ -52,16 +37,6 @@ RSpec.describe AnswersController, type: :controller do
       it 'renders template create' do
         post :create, question_id: question.id, answer: attributes_for(:nil_answer), format: :js
         expect(response).to render_template :create
-      end
-
-      it 'does not send notification to author' do
-        expect(QuestionMailer).to_not receive(:notify_author).and_call_original
-        post :create, question_id: question.id, answer: attributes_for(:nil_answer), format: :js
-      end
-
-      it 'does not send notification to subscribers' do
-        expect(QuestionMailer).to_not receive(:notify_subscribers).and_call_original
-        post :create, question_id: question.id, answer: attributes_for(:nil_answer), format: :js
       end
     end
   end

@@ -1,5 +1,7 @@
 # Model for Answer
 class Answer < ActiveRecord::Base
+  default_scope { order(best: :desc, created_at: :asc) }
+
   include Attachable
   include Votable
   include Commentable
@@ -11,12 +13,18 @@ class Answer < ActiveRecord::Base
   validates :question_id, presence: true
   validates :user_id, presence: true
 
-  default_scope { order(best: :desc, created_at: :asc) }
+  after_create :notify_subscribers
 
   def make_the_best
     ActiveRecord::Base.transaction do
       question.answers.update_all(best: false) unless best?
       update!(best: best? ? false : true)
     end
+  end
+
+  private
+
+  def notify_subscribers
+    QuestionSubscriptionJob.perform_later(self)
   end
 end
