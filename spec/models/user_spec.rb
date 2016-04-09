@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   # associations
   it { should have_many(:questions) }
+  it { should have_many(:subscriptions) }
 
   # validations
   it { should validate_presence_of :email }

@@ -7,6 +7,7 @@ RSpec.describe Question, type: :model do
   it { should have_many(:attachments).dependent(:destroy) }
   it { should have_many(:votes).dependent(:delete_all) }
   it { should belong_to(:author) }
+  it { should have_many(:subscriptions) }
 
   # validations
   it { should validate_presence_of :title }
