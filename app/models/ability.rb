@@ -31,6 +31,7 @@ class Ability
     can :destroy, [Question, Answer, Comment], user_id: user.id
     can :destroy, Attachment, attachable: { user_id: user.id }
     can :set_best, Answer, question: { user_id: user.id }
+    can :subscribe_on, [Question] { |question| !question.subscriptions.exists?(user_id: user.id) }
 
     can :me, User
     can :all_but_me, User

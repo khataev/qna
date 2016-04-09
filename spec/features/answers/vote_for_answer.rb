@@ -11,7 +11,7 @@ feature 'Vote for answer', '
   given!(:answer) { create(:answer, author: author, question: question) }
 
   given(:question_with_answer_with_positive_vote) { create(:question_with_answer_with_positive_vote, vote_author: user) }
-  given(:question_with_answer_with_negative_vote) { create(:question_with_answer_with_negative_votee, vote_author: user) }
+  # given(:question_with_answer_with_negative_vote) { create(:question_with_answer_with_negative_votee, vote_author: user) }
 
   scenario 'Just created answer have zero votes' do
     visit question_path(question)

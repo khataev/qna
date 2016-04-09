@@ -10,6 +10,7 @@ FactoryGirl.define do
 
     transient do
       vote_author :user
+      subscriber :user
     end
 
     factory :question_with_answers do
@@ -53,6 +54,12 @@ FactoryGirl.define do
       after(:create) do |question, evaluator|
         create(:answer, question: question)
         create(:vote, votable: question.answers.first, value: false, user: evaluator.vote_author)
+      end
+    end
+
+    factory :subscribed_question do
+      after(:create) do |question, evaluator|
+        create(:subscription, question: question, user: evaluator.subscriber)
       end
     end
   end
