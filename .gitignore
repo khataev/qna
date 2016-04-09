@@ -19,3 +19,4 @@ config/test_env.yml
 .overcommit.yml
 .idea
 .byebug_history
+dump.rdb
