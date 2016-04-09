@@ -38,13 +38,6 @@ class QuestionsController < ApplicationController
     respond_with(@question)
   end
 
-  def subscribe_on
-    @subscription = @question.subscriptions.create(user: current_user)
-    render json: @subscription
-    # TODO: Why this return empty response?
-    # respond_with(@subscription = @question.subscriptions.create(user: current_user))
-  end
-
   private
 
   def question_params

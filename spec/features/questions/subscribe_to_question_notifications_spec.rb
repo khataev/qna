@@ -7,7 +7,7 @@ feature 'Subscribe to Question notifications', "
 " do
   given(:user) { create(:user) }
   given(:question) { create(:question) }
-  given(:subscribed_question) { create(:subscribed_question, subscriber: user) }
+  given(:subscribed_question) { create(:question_with_subscriber, subscriber: user) }
 
   context 'Non-authenticated user' do
     before { visit question_path(question) }

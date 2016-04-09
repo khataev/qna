@@ -57,9 +57,15 @@ FactoryGirl.define do
       end
     end
 
-    factory :subscribed_question do
+    factory :question_with_subscriber do
       after(:create) do |question, evaluator|
         create(:subscription, question: question, user: evaluator.subscriber)
+      end
+    end
+
+    factory :question_with_subscribers do
+      after(:create) do |question|
+        create_list(:subscription, 2, question: question, user: create(:user))
       end
     end
   end

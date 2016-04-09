@@ -176,21 +176,5 @@ RSpec.describe QuestionsController, type: :controller do
     end
   end
 
-  describe 'PATCH #subscribe_on' do
-    let!(:question) { create(:question) }
-    context 'Non-authenticated user' do
-      it 'could not subscribe on question updates' do
-        expect { patch :subscribe_on, id: question, format: :js }.to_not change(Subscription, :count)
-      end
-    end
-
-    context 'Authenticated user' do
-      it 'subscribes on question updates' do
-        sign_in(user)
-        expect { patch :subscribe_on, id: question, format: :json }.to change(question.subscriptions, :count).by(1)
-      end
-    end
-  end
-
   it_behaves_like 'voted'
 end

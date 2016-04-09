@@ -26,14 +26,14 @@ Rails.application.routes.draw do
   end
 
   resources :questions, concerns: [:votable, :commentable] do
-    patch :subscribe_on, on: :member
     resources :answers, concerns: [:votable, :commentable], only: [:create, :edit], shallow: true do
       patch :set_best, on: :member
     end
+    resources :subscriptions, only: :create, shallow: true
   end
 
   resources :answers, only: [:update, :destroy]
-  resources :attachments, only: [:destroy]
+  resources :attachments, only: :destroy
 
   # API
   namespace :api do

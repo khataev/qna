@@ -12,6 +12,8 @@ class Question < ActiveRecord::Base
   validates :body, presence: true, length: { minimum: 10 }
   validates :user_id, presence: true
 
+  scope :last_day_questions, -> { where('created_at >= ? ', 24.hours.ago) }
+
   # def as_json(_options = {})
   #   super(only: [:id, :title, :body, :created_at, :updated_at])
   # end

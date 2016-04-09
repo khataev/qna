@@ -8,7 +8,7 @@
   .subscribe-area
     .subscribe-result
     - if can? :subscribe_on, question
-      = link_to 'Subscribe for updates', subscribe_on_question_path(question), method: :patch, remote: true, data: { type: :json }, class: 'subscribe-link'
+      = link_to 'Subscribe for updates', question_subscriptions_path(question), method: :post, remote: true, data: { type: :json }, class: 'subscribe-link'
 
   = render 'attachments/attachments', attachable: question
 
