@@ -1,5 +1,5 @@
 .row.question-area{ id: "question-#{@question.id}"}
-  = render 'question_show', question: @question
+  = render 'question_show', question: @question, subscription: @subscription
   .col-md-8
     = render 'comments/comments', commentable: @question, comment: @comment
 .row

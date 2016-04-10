@@ -3,14 +3,14 @@ class QuestionsController < ApplicationController
   include Voted
 
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :load_question, only: [:show, :destroy, :update, :subscribe_on]
+  before_action :load_question, only: [:show, :destroy, :update]
   before_action :build_answer, only: :show
+  before_action :load_subscription, only: :show
   after_action  :publish_question, only: :create
 
   authorize_resource
 
   respond_to :js, only: :update
-  respond_to :json, only: :subscribe_on
 
   def index
     respond_with(@questions = Question.all)
@@ -55,5 +55,9 @@ class QuestionsController < ApplicationController
 
   def publish_question
     PrivatePub.publish_to('/questions', question: @question.to_json) if @question.valid?
+  end
+
+  def load_subscription
+    @subscription = @question.subscriptions.find_by(user: current_user)
   end
 end

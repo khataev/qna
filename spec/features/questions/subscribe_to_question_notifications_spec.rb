@@ -22,31 +22,56 @@ feature 'Subscribe to Question notifications', "
   context 'Authenticated user' do
     before do
       sign_in(user)
-      visit question_path(question)
     end
 
-    scenario "could subscribe on question's update" do
-      within '.subscribe-area' do
-        expect(page).to have_link 'Subscribe for updates'
+    context 'subscribe' do
+      before do
+        visit question_path(question)
       end
-    end
 
-    scenario "could not subscribe twice on question's update" do
-      visit question_path(subscribed_question)
-
-      within '.subscribe-area' do
-        expect(page).to_not have_link 'Subscribe for updates'
-      end
-    end
-
-    scenario 'subscribes on', js: true do
-      within '.subscribe-area' do
-        click_on 'Subscribe for updates'
-
-        within '.subscribe-result' do
-          expect(page).to have_content 'Subscription successful'
+      scenario "could subscribe on question's update" do
+        within '.subscribe-area' do
+          expect(page).to have_link 'Subscribe for updates'
         end
-        expect(page).to_not have_link 'Subscribe for updates'
+      end
+
+      scenario "could not subscribe twice on question's update" do
+        visit question_path(subscribed_question)
+
+        within '.subscribe-area' do
+          expect(page).to_not have_link 'Subscribe for updates'
+          expect(page).to have_link 'Unsubscribe from updates'
+        end
+      end
+
+      scenario 'subscribes on', js: true do
+        within '.subscribe-area' do
+          click_on 'Subscribe for updates'
+
+          within '.subscribe-result' do
+            expect(page).to have_content 'Subscription successful'
+          end
+          expect(page).to_not have_link 'Subscribe for updates'
+          expect(page).to have_link 'Unsubscribe from updates'
+        end
+      end
+    end
+
+    context 'unsubscribe' do
+      before do
+        visit question_path(subscribed_question)
+      end
+
+      scenario 'unsubscribes', js: true do
+        within '.subscribe-area' do
+          click_on 'Unsubscribe from updates'
+
+          within '.subscribe-result' do
+            expect(page).to have_content 'Unsubscription successful'
+          end
+          expect(page).to have_link 'Subscribe for updates'
+          expect(page).to_not have_link 'Unsubscribe from updates'
+        end
       end
     end
   end
