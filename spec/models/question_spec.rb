@@ -19,6 +19,27 @@ RSpec.describe Question, type: :model do
   # nested attributes
   it { should accept_nested_attributes_for :attachments }
 
+  describe '#user_subscription' do
+    let(:user) { create(:user) }
+    let(:question_with_subscriber) { create(:question_with_subscriber, subscriber: user) }
+    let(:question) { create(:question) }
+
+    it 'returns subscription' do
+      subscription = question_with_subscriber.subscriptions.find_by(user: user)
+      expect(question_with_subscriber.user_subscription(user)).to eq subscription
+    end
+    it 'returns nil' do
+      expect(question.user_subscription(user)).to be_nil
+    end
+  end
+
+  describe 'create' do
+    it 'should subscribe author after create' do
+      new_question = create(:question)
+      expect(new_question.subscriptions.first.user).to eq new_question.author
+    end
+  end
+
   # Votable interface
   it_behaves_like 'votable'
 

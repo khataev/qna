@@ -1,0 +1,5 @@
+.subscribe-result
+- if can? :subscribe_on, question
+  = link_to 'Subscribe for updates', question_subscriptions_path(question), method: :post, remote: true, class: 'subscribe-link'
+- if can? :unsubscribe_from, question
+  = link_to 'Unsubscribe from updates', question.user_subscription(current_user), method: :delete, remote: true, class: 'unsubscribe-link'
