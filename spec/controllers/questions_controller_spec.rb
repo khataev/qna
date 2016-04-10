@@ -116,24 +116,12 @@ RSpec.describe QuestionsController, type: :controller do
 
     describe 'by someone else' do
       let(:question) { create(:question) }
-      let(:new_question) { build(:question, title: 'new question title', body: 'new question body') }
 
-      before do
-        sign_in(user)
-        patch :update, id: question, question: attributes_for(:question, title: new_question.title, body: new_question.body), format: :js
-      end
+      before { sign_in(user) }
 
       it 'could not update question' do
-        old_title = question.title
-        old_body = question.body
-        old_updated_at = question.updated_at
-
+        expect(Question).to_not receive(:update)
         patch :update, id: question, question: attributes_for(:question, title: 'new valid title', body: 'new valid body'), format: :js
-        question.reload
-
-        expect(question.title).to eq old_title
-        expect(question.body).to eq old_body
-        expect(question.updated_at).to eq old_updated_at
       end
     end
   end
