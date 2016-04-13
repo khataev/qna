@@ -20,3 +20,5 @@ config/test_env.yml
 .idea
 .byebug_history
 dump.rdb
+config/*.sphinx.conf
+db/sphinx
