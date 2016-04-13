@@ -1,0 +1,7 @@
+.search-header Search results:
+
+- if @search_results.blank?
+  %p Search yielded no results
+- else
+  - @search_results.each do |result|
+    = render "#{result.class.name.downcase}", result: result

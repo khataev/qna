@@ -1,0 +1,8 @@
+-# TODO: nil query field disable Search button
+.row
+  .col-sm-12
+    = form_tag search_path, method: :get, html: { class: 'form-inline' } do
+      = label :query, '', 'Site search:'
+      = text_field_tag :query, params[:query], placeholder: "enter keywords"
+      = select_tag :scope, options_for_select(Search::SCOPES)
+      = submit_tag "Search", class: 'btn btn-default'

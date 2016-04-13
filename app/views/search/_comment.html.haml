@@ -1,0 +1,6 @@
+.comment-body
+  = result.body
+- if result.commentable_type == 'Question'
+  %p= link_to result.commentable.title, result.commentable
+- if result.commentable_type == 'Answer'
+  %p= link_to result.commentable.question.title, result.commentable.question

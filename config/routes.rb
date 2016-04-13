@@ -35,6 +35,9 @@ Rails.application.routes.draw do
   resources :answers, only: [:update, :destroy]
   resources :attachments, only: :destroy
 
+  # search
+  get '/search', to: 'search#show'
+
   # API
   namespace :api do
     namespace :v1 do

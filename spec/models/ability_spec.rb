@@ -14,6 +14,9 @@ describe Ability do
     it { should_not be_able_to :create, Subscription }
     it { should_not be_able_to :destroy, Subscription }
 
+    # Site Search
+    it { should be_able_to :show, Search }
+
     # API
     it { should_not be_able_to :me, User }
     it { should_not be_able_to :all_but_me, User }
@@ -49,6 +52,9 @@ describe Ability do
     it { should be_able_to :read, Question }
     it { should be_able_to :read, Answer }
     it { should be_able_to :read, Comment }
+
+    # Site Search
+    it { should be_able_to :show, Search }
 
     # like User
     # create

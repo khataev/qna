@@ -28,6 +28,7 @@ class Ability
 
   def as_guest
     can :read, [Question, Answer, Comment]
+    can :show, Search
   end
 
   def as_user(user)

@@ -15,6 +15,9 @@
         = link_to('Register', new_user_registration_path)
 
     .container
+
+      = render 'search/form'
+
       %p.notice= notice
       %p.alert= alert
       -#.row
