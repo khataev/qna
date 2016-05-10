@@ -15,6 +15,7 @@
 /public/uploads
 
 config/database.yml
+config/private_pub.yml
 config/test_env.yml
 .overcommit.yml
 .idea
