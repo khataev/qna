@@ -57,6 +57,8 @@ gem 'sinatra', require: nil
 gem 'whenever'
 gem 'mysql2'
 gem 'thinking-sphinx'
+gem 'dotenv'
+gem 'dotenv-deployment', require: 'dotenv/deployment'
 
 group :development do
   gem 'spring-commands-rspec'
