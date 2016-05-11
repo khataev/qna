@@ -12,7 +12,7 @@ set :deploy_user, 'deployer'
 set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/private_pub.yml', '.env')
 
 # Default value for linked_dirs is []
-set :linked_dirs, fetch(:linked_dirs, []).push('bin', 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system', 'vendor/bundle')
+set :linked_dirs, fetch(:linked_dirs, []).push('bin', 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system', 'vendor/bundle', 'public/uploads')
 
 # rbenv
 set :rbenv_type, :user # or :system, depends on your rbenv setup
