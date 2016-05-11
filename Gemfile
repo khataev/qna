@@ -63,6 +63,12 @@ group :development do
   gem 'fasterer', require: false
   gem 'brakeman', require: false
   gem 'letter_opener'
+
+  # capistrano
+  gem 'capistrano', require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano-rails', require: false
+  gem 'capistrano-rbenv', require: false
 end
 
 group :development, :test do
