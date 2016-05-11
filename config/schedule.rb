@@ -17,4 +17,8 @@ every 1.day do
   runner 'DailyDigestJob.perform'
 end
 
+every 1.hour do
+  rake 'ts:index'
+end
+
 # Learn more: http://github.com/javan/whenever
