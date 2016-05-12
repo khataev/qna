@@ -69,3 +69,4 @@ namespace :private_pub do
 end
 
 after 'deploy:restart', 'private_pub:restart'
+after 'deploy:restart', 'thinking_sphinx:restart'
