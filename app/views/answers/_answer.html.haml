@@ -1,27 +1,28 @@
 - if answer.persisted?
-  %div{ id: "answer-#{answer.id}", class: (answer.best? ? 'best-answer' : nil)  }
-    .answer-vote-area
-      = render 'votables/votable', votable: answer
-    .answer_body
-      = answer.body
-    = render 'attachments/attachments', attachable: answer
+  - cache answer do
+    %div{ id: "answer-#{answer.id}", class: (answer.best? ? 'best-answer' : nil)  }
+      .answer-vote-area
+        = render 'votables/votable', votable: answer
+      .answer_body
+        = answer.body
+      = render 'attachments/attachments', attachable: answer
 
-    .answer_links
-      %ul
-      - if can? :set_best, answer
-        %li= link_to  (answer.best? ? 'Revert' : 'Make the Best'), set_best_answer_path(answer), method: :patch, remote: true
+      .answer_links
+        %ul
+        - if can? :set_best, answer
+          %li= link_to  (answer.best? ? 'Revert' : 'Make the Best'), set_best_answer_path(answer), method: :patch, remote: true
 
-      - if can? :update, answer
-        %li= link_to 'Edit', '', class: 'edit-answer-link', data: { answer_id: answer.id }
+        - if can? :update, answer
+          %li= link_to 'Edit', '', class: 'edit-answer-link', data: { answer_id: answer.id }
 
-      - if can? :destroy, answer
-        %li= link_to 'Delete', answer, method: :delete, data: { confirm: "Are you sure?" }, remote: true
-        %p
-          = form_for answer, remote: true, html: { id: "edit-answer-#{answer.id}" } do |f|
-            = f.label :body, 'Answer'
-            = f.text_area :body
-            = f.submit 'Save'
+        - if can? :destroy, answer
+          %li= link_to 'Delete', answer, method: :delete, data: { confirm: "Are you sure?" }, remote: true
+          %p
+            = form_for answer, remote: true, html: { id: "edit-answer-#{answer.id}" } do |f|
+              = f.label :body, 'Answer'
+              = f.text_area :body
+              = f.submit 'Save'
 
-    = render 'comments/comments', commentable: answer
+      = render 'comments/comments', commentable: answer
 
   = subscribe_to "/answers/#{answer.id}/comments"

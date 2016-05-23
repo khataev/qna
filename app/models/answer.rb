@@ -6,7 +6,7 @@ class Answer < ActiveRecord::Base
   include Votable
   include Commentable
 
-  belongs_to :question
+  belongs_to :question, touch: true
   belongs_to :author, class_name: 'User', foreign_key: 'user_id'
 
   validates :body, presence: true, length: { minimum: 10 }

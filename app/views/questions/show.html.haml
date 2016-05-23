@@ -1,16 +1,17 @@
-.row.question-area{ id: "question-#{@question.id}"}
-  = render 'question_show', question: @question, subscription: @subscription
-  .col-md-8
-    = render 'comments/comments', commentable: @question, comment: @comment
-.row
-  .col-md-8
-    .answers
-      = render 'answers/answer_list'
-
-- if user_signed_in?
+- cache @question do
+  .row.question-area{ id: "question-#{@question.id}"}
+    = render 'question_show', question: @question, subscription: @subscription
+    .col-md-8
+      = render 'comments/comments', commentable: @question, comment: @comment
   .row
     .col-md-8
-      = render partial: 'answers/new_answer_form'
+      .answers
+        = render 'answers/answer_list'
+
+  - if user_signed_in?
+    .row
+      .col-md-8
+        = render partial: 'answers/new_answer_form'
 
 = subscribe_to "/questions/#{@question.id}/answers"
 = subscribe_to "/questions/#{@question.id}/comments"

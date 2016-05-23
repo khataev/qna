@@ -2,7 +2,7 @@
 class Comment < ActiveRecord::Base
   # associations
   belongs_to :author, class_name: 'User', foreign_key: 'user_id'
-  belongs_to :commentable, polymorphic: true
+  belongs_to :commentable, polymorphic: true, touch: true
 
   # validations
   validates :body, presence: true, length: { minimum: 10, maximum: 100 }

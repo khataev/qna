@@ -1,8 +1,9 @@
 - if comment.persisted?
-  %div{ id: "comment-#{comment.id}" }
-    %span.comment-body
-      = comment.body
-    %span.comment-author
-      = comment.author.email
-    %span.comment-date
-      = comment.created_at
+  - cache comment do
+    %div{ id: "comment-#{comment.id}" }
+      %span.comment-body
+        = comment.body
+      %span.comment-author
+        = comment.author.email
+      %span.comment-date
+        = comment.created_at

@@ -7,9 +7,10 @@
       = link_to 'Add comment', '', class: 'new-comment-link', data: { owner: "#{commentable.class.name.underscore}-#{commentable.id}" }
 
     - if user_signed_in?
-      %p
-        = form_for [commentable, Comment.new], html: { class: 'new-comment-form' }, remote: true do |f|
-          .question-comment-errors
-          = f.label :body, 'Your Comment'
-          = f.text_area :body, cols: 92, rows: 3, class: 'new-comment-body form-control'
-          = f.submit 'Post comment'
+      - cache ['comment_form', commentable] do
+        %p
+          = form_for [commentable, Comment.new], html: { class: 'new-comment-form' }, remote: true do |f|
+            .question-comment-errors
+            = f.label :body, 'Your Comment'
+            = f.text_area :body, cols: 92, rows: 3, class: 'new-comment-body form-control'
+            = f.submit 'Post comment'
