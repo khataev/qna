@@ -5,7 +5,7 @@ class Api::V1::QuestionsController < Api::V1::BaseController
   before_action :load_question, only: :show
 
   def index
-    @questions = Question.all
+    @questions = Question.all.order(:id)
     respond_with @questions
   end
 
