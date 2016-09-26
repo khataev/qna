@@ -8,8 +8,8 @@ script: xvfb-run bundle exec rspec
 #env: QMAKE=/usr/lib/x86_64-linux-gnu/qt5/bin/qmake
 addons:
   apt:
-    sources:
-      - ubuntu-sdk-team
+#    sources:
+#      - ubuntu-sdk-team
     packages:
       - libqtwebkit-dev
       - gstreamer1.0-plugins-base
