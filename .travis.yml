@@ -12,8 +12,10 @@ before_install:
   - brew update
   - brew install mysql
   - brew instal sphinx --with-pgsql --with-mysql
-  - brew install qt5
-  - brew link --force qt5
+  - brew uninstall qt
+  - brew install qt55
+  - brew linkapps qt55
+  - brew link --force qt55
   - brew install redis
 before_script:
   - bundle exec rackup private_pub.ru -s thin -E production &
