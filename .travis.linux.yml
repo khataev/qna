@@ -1,14 +1,18 @@
-os: osx
+sudo: required
+dist: trusty
 language: ruby
 services:
   - postgresql
-script: bundle exec rspec
-before_install:
-  - brew update
-  - brew install mysql
-  - brew instal sphinx --pgsql --mysql
-  - brew install qt5
-  - brew install redis
+script: xvfb-run bundle exec rspec
+addons:
+  apt:
+    sources:
+#      - ubuntu-sdk-team
+    packages:
+      - libqtwebkit-dev
+      - gstreamer1.0-plugins-base
+      - gstreamer1.0-tools
+      - gstreamer1.0-x
 before_script:
   - bundle exec rackup private_pub.ru -s thin -E production &
   - cp config/database.yml.travis config/database.yml
