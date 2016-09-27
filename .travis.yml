@@ -1,11 +1,14 @@
-os: osx
-language: ruby
+osx_image: xcode7.3
+language: objective-c
+cache: bundler
 rvm:
   - 2.3.0
+
 script: bundle exec rspec
 before_install:
   - rvm get stable --auto-dotfiles
   - rvm install 2.3.0
+  - sudo gem install bundler
   - brew update
   - brew install mysql
   - brew instal sphinx --pgsql --mysql
