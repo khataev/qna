@@ -9,9 +9,8 @@
         %p Currently no questions yet
       -else
         %p= "#{pluralize(@questions.count,'Question')}"
-    %table.table.table-striped.questions-table
-      - if @questions.count > 0
-        = render @questions
+    - if @questions.count > 0
+      = render @questions
 
 .row
   %p= link_to 'Ask question', new_question_path
