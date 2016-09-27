@@ -9,7 +9,8 @@ script: xvfb-run bundle exec rspec
 #env: QMAKE=/usr/lib/x86_64-linux-gnu/qt5/bin/qmake
 addons:
   apt:
-#    sources:
+    sources:
+      - gstreamer-developers/ppa
 #      - builds/sphinxsearch-rel22
 #      - ubuntu-sdk-team
     packages:
