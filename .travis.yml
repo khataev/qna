@@ -4,7 +4,7 @@ language: ruby
 services:
   - postgresql
   - rack
-  - mysql
+#  - mysql
 #  - sphinxsearch
 script: xvfb-run bundle exec rspec
 #env: QMAKE=/usr/lib/x86_64-linux-gnu/qt5/bin/qmake
@@ -26,5 +26,5 @@ before_script:
   - cp config/database.yml.travis config/database.yml
   - cp config/private_pub.yml.sample config/private_pub.yml
   - psql -c 'create database travis_ci_test;' -U postgres
-  - rake ts:index
-  - rake ts:start
+  - bundle exec rake ts:index
+  - bundle exec rake ts:start
