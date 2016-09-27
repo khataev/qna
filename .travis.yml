@@ -26,3 +26,5 @@ before_script:
   - cp config/database.yml.travis config/database.yml
   - cp config/private_pub.yml.sample config/private_pub.yml
   - psql -c 'create database travis_ci_test;' -U postgres
+  - rake ts:index
+  - rake ts:start
