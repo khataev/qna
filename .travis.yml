@@ -1,9 +1,8 @@
-sudo: required
-dist: trusty
+sudo: false
 language: ruby
 services:
   - postgresql
-  - rack
+#  - rack
 #  - mysql
 #  - sphinxsearch
 script: xvfb-run bundle exec rspec
@@ -26,5 +25,5 @@ before_script:
   - cp config/database.yml.travis config/database.yml
   - cp config/private_pub.yml.sample config/private_pub.yml
   - psql -c 'create database travis_ci_test;' -U postgres
-  - bundle exec rake ts:index
-  - bundle exec rake ts:start
+#  - bundle exec rake ts:index
+#  - bundle exec rake ts:start
