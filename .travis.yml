@@ -11,8 +11,9 @@ before_install:
   - sudo gem install bundler
   - brew update
   - brew install mysql
-  - brew instal sphinx --pgsql --mysql
+  - brew instal sphinx --with-pgsql --with-mysql
   - brew install qt5
+  - brew link --force qt5
   - brew install redis
 before_script:
   - bundle exec rackup private_pub.ru -s thin -E production &
