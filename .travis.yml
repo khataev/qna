@@ -4,21 +4,24 @@ language: ruby
 services:
   - postgresql
   - rack
+  - sphinxsearch
 script: xvfb-run bundle exec rspec
 #env: QMAKE=/usr/lib/x86_64-linux-gnu/qt5/bin/qmake
 addons:
   apt:
-#    sources:
+    sources:
+#      - builds/sphinxsearch-rel22
 #      - ubuntu-sdk-team
     packages:
       - libqtwebkit-dev
       - gstreamer1.0-plugins-base
       - gstreamer1.0-tools
       - gstreamer1.0-x
-      - sphinxsearch
+#      - sphinxsearch
 #      - libqt5webkit5-dev
 #      - qtdeclarative5-dev
 before_script:
+  - apt-get install
   - bundle exec rackup private_pub.ru -s thin -E production &
   - cp config/database.yml.travis config/database.yml
   - cp config/private_pub.yml.sample config/private_pub.yml
