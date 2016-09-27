@@ -1,11 +1,11 @@
 os: osx
 language: ruby
 rvm:
-  - "2.3.0"
-services:
-  - postgresql
+  - 2.3.0
 script: bundle exec rspec
 before_install:
+  - rvm get stable --auto-dotfiles
+  - rvm install 2.3.0
   - brew update
   - brew install mysql
   - brew instal sphinx --pgsql --mysql
