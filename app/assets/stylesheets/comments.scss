@@ -5,3 +5,17 @@
 .new-comment-form {
   display: none;
 }
+
+.comment-row {
+  margin-top: 5px;
+  border-top: solid gray 1px;
+}
+
+span.comment-author {
+  background-color: bisque;
+  color: blue;
+}
+
+span.comment-date {
+  color: gray;
+}

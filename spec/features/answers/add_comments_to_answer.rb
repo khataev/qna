@@ -16,14 +16,14 @@ feature 'Commenting answer', '
     end
 
     scenario 'Sees Add comment link, but textarea is hidden', js: true do
-      within "#answer-#{answer.id}" do
+      within "#answer-#{answer.id}-comments-row" do
         expect(page).to have_link 'Add comment'
         expect(page).to_not have_selector('.new-comment-form')
       end
     end
 
     scenario 'Sees form for comment after clicking on link', js: true do
-      within "#answer-#{answer.id}" do
+      within "#answer-#{answer.id}-comments-row" do
         click_on 'Add comment'
 
         expect(page).to have_selector('.new-comment-form')
@@ -35,7 +35,7 @@ feature 'Commenting answer', '
     scenario 'Adds comment', js: true do
       comment = build(:comment, author: user)
 
-      within "#answer-#{answer.id}" do
+      within "#answer-#{answer.id}-comments-row" do
         click_on 'Add comment'
         fill_in 'Your Comment', with: comment.body
         click_on 'Post comment'
@@ -58,7 +58,7 @@ feature 'Commenting answer', '
     before { visit question_path(question) }
 
     scenario 'Cannot add comment' do
-      within "#answer-#{answer.id}" do
+      within "#answer-#{answer.id}-comments-row" do
         expect(page).to_not have_link 'Add comment'
       end
     end

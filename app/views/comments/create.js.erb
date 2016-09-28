@@ -5,7 +5,7 @@
 <% else %>
   <!-- Find out comments table div for commentable -->
   <% ownerId = "##{@comment.commentable_type.underscore}-#{@comment.commentable.id}" %>
-  <% commentsTable = "#{ownerId} .comments-table" %>
+  <% commentsTable = "#{ownerId}-comments-row .comments-table" %>
   <% publish_to "/#{@comment.commentable_type.pluralize.underscore}/#{@comment.commentable.id}/comments" do %>
     $('<%= commentsTable %>').append('<%= j render @comment %>');
   <% end %>

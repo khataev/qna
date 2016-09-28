@@ -1,9 +1,12 @@
 - if comment.persisted?
   - cache comment do
-    %div{ id: "comment-#{comment.id}" }
+    %div{ id: "comment-#{comment.id}", class: "comment-row" }
       %span.comment-body
         = comment.body
+      %p
+      %span.glyphicon.glyphicon-user
       %span.comment-author
         = comment.author.email
+      %span.glyphicon.glyphicon-time
       %span.comment-date
         = comment.created_at

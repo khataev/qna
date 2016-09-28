@@ -7,7 +7,7 @@ ready = ->
     e.preventDefault()
     $(this).hide()
     owner = $(this).data('owner')
-    $("##{owner} .new-comment-form").show()
+    $("##{owner}-comments-row .new-comment-form").show()
 
 # TODO: zebra tables comments
 
