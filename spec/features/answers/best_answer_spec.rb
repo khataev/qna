@@ -50,7 +50,7 @@ feature 'Best answer', '
       end
 
       scenario 'sees the chosen answer as the best', js: true do
-        expect(answer_div(@best_answer_id)[:class]).to eq 'best-answer'
+        expect(answer_div(@best_answer_id)[:class]).to include 'best-answer'
       end
 
       scenario 'sees appropriate link', js: true do
@@ -72,8 +72,8 @@ feature 'Best answer', '
         sleep(1) # intentional delay
         # expect(answer_div(@best_answer_id)).to_not have_selector('.best-answer')
         # expect(answer_div(new_best_answer_id)).to have_selector('.best-answer')
-        expect(answer_div(@best_answer_id)[:class]).to_not eq 'best-answer'
-        expect(answer_div(new_best_answer_id)[:class]).to eq 'best-answer'
+        expect(answer_div(@best_answer_id)[:class]).to_not include 'best-answer'
+        expect(answer_div(new_best_answer_id)[:class]).to include 'best-answer'
       end
     end
   end
