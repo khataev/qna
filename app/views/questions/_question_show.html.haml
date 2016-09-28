@@ -1,26 +1,28 @@
 .col-md-8
   %h1
     = question.title
-  .question-vote-area
-    = render 'votables/votable', votable: question
-  .question_body
-    = question.body
-  .subscribe-area
-    = render 'subscriptions/subscription', question: question
+  .col-md-1
+    .question-vote-area
+      = render 'votables/votable', votable: question
+  .col-md-7
+    .question_body
+      = question.body
+    .subscribe-area
+      = render 'subscriptions/subscription', question: question
 
-  = render 'attachments/attachments', attachable: question
+    = render 'attachments/attachments', attachable: question
 
-  - if can? :update, question
-    = link_to 'Edit', '', class: 'edit-question-link'
-  - if can? :destroy, question
-    = link_to 'Delete', question, method: :delete, data: { confirm: "Are you sure?" }
+    - if can? :update, question
+      = link_to 'Edit', '', class: 'edit-question-link'
+    - if can? :destroy, question
+      = link_to 'Delete', question, method: :delete, data: { confirm: "Are you sure?" }
 
-    %p
-      = form_for question, remote: true, html: {id: 'edit-question-form'} do |f|
-        .question-errors
-        = f.label :title, 'Title'
-        = f.text_field :title
-        %br
-        = f.label :body, 'Body'
-        = f.text_area :body
-        = f.submit 'Save'
+      %p
+        = form_for question, remote: true, html: {id: 'edit-question-form'} do |f|
+          .question-errors
+          = f.label :title, 'Title'
+          = f.text_field :title
+          %br
+          = f.label :body, 'Body'
+          = f.text_area :body
+          = f.submit 'Save'
