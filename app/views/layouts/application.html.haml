@@ -7,16 +7,25 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
 
   %body
-    .user-nav
-      - if user_signed_in?
-        = link_to('Logout', destroy_user_session_path, :method => :delete)
-      - else
-        = link_to('Login', new_user_session_path)
-        = link_to('Register', new_user_registration_path)
+
 
     .container
+      .row
+        .col-md-3.left-nav
+          %span.glyphicon.glyphicon-home
+          = link_to 'Home', root_path
+          .inline-paragraph
+            |
+          - if user_signed_in?
+            = link_to('Logout', destroy_user_session_path, :method => :delete)
+          - else
+            = link_to('Login', new_user_session_path)
+            = link_to('Register', new_user_registration_path)
+        .col-md-5.text-right
+          = render 'search/form'
 
-      = render 'search/form'
+      .row
+        .col-md-8.separator
 
       %p.notice= notice
       %p.alert= alert

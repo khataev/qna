@@ -15,3 +15,16 @@
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+.inline-paragraph {
+  display:  inline-block;
+}
+
+.separator {
+  border-bottom: dashed blue 1px;
+  margin-top: 10px;
+}
+
+.left-nav {
+  padding-top: 9px;
+}
