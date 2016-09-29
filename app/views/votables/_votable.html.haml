@@ -1,13 +1,12 @@
-.vote-area
+.vote-area.text-center
   .vote-errors
   .vote-up
-    = link_to 'Vote for', vote_for_votable_path(votable), method: :patch, remote: true, id: 'link-vote-for', data: { hide: cannot?(:vote_for, votable), type: :json }
-    -#.glyphicon.glyphicon-triangle-top
-  %h3
-    %span.label.label-info.vote-counter
-      = votable.rating
+    = link_to vote_up_icon, vote_for_votable_path(votable), method: :patch, remote: true, id: 'link-vote-for', data: { hide: cannot?(:vote_for, votable), type: :json }
+    -#%span.glyphicon.glyphicon-triangle-top.glyphicon-link
+  %span.label-info.vote-counter
+    = votable.rating
   .vote-back
     = link_to 'Vote back', vote_back_votable_path(votable), method: :patch, remote: true, id: 'link-vote-back', data: { hide: cannot?(:vote_back, votable), type: :json }
   .vote-down
-    = link_to 'Vote against', vote_against_votable_path(votable), method: :patch, remote: true, id: 'link-vote-against', data: { hide: cannot?(:vote_against, votable), type: :json }
-    -#.glyphicon.glyphicon-triangle-bottom
+    = link_to vote_down_icon, vote_against_votable_path(votable), method: :patch, remote: true, id: 'link-vote-against', data: { hide: cannot?(:vote_against, votable), type: :json }
+    -#%span.glyphicon.glyphicon-triangle-bottom.glyphicon-link
