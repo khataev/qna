@@ -2,29 +2,24 @@
 
 {<img src="https://travis-ci.org/khataev/qna.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/khataev/qna]
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Мой учебный проект по курсу профессиональная разработка на Ruby on Rails в школе Thinknetica http://thinknetica.com/ror_advanced
 
-Things you may want to cover:
+Демо http://7thheaven.myds.me:4000
 
-* Ruby version - 2.3.0
+Сайт - "клон" платформы http://stackoverflow.com, позволяет:
+* добавлять вопросы, ответы, комментарии к ним.
+* Добавлять вложения к вопросам и ответам, выбирать автору вопроса лучший ответ
+* Поддерживается рейтинг (за и против) вопросов и ответов
+* Полнотекстовый поиск по вопросам и ответам (thinking sphinx)
+* Поддержка фоновых процессов (ежедневный дайджест вопросов, подписка на новые ответы), рассылка писем (sidekiq), запуск задач по расписанию
+* Авторизация и айтентификация, втч через OAUTH провайдеров - соцсети (devise).
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Используемые технологии:
+* конесно же Ruby 2.3.0 и Rails 4.2.5
+* postgresql
+* haml, css
+* coffescript
+* немного bootstrap (в профессиональной верстке пока не силен - к вопросу о сырости и невзрачности интерфейсов),
+* ajax
+* websockets
+* TDD/BDD с RSPEC
