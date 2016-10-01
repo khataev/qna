@@ -15,6 +15,13 @@ div.all_questions {
 }
 
 .question_body {
+  min-height: 50px;
   //background-color: red;
 }
+
+.edit-question-link, .delete-question-link {
+  background-color: lightblue;
+}
+
+
 

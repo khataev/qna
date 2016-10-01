@@ -9,13 +9,12 @@
       = question.body
     .subscribe-area
       = render 'subscriptions/subscription', question: question
-
     = render 'attachments/attachments', attachable: question
 
     - if can? :update, question
       = link_to 'Edit', '', class: 'edit-question-link'
     - if can? :destroy, question
-      = link_to 'Delete', question, method: :delete, data: { confirm: "Are you sure?" }
+      = link_to 'Delete', question, class: 'delete-question-link', method: :delete, data: { confirm: "Are you sure?" }
 
       %p
         = form_for question, remote: true, html: {id: 'edit-question-form'} do |f|
