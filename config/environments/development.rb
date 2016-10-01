@@ -49,6 +49,6 @@ Rails.application.configure do
     Bullet.n_plus_one_query_enable = true
   end
 
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.default_url_options = { host: '7thheaven.myds.me', port: 4000 }
   config.action_mailer.delivery_method = :letter_opener
 end
