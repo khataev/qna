@@ -4,6 +4,12 @@
 
 .edit_answer { display: none; }
 .best-answer { background-color: yellow; }
-.answers  {
-  border-top: solid gray 1px;
-}
+.answers  {  border-top: solid gray 1px;  }
+.answers-table {  margin-top: 20px;  }
+#answers-count { background-color: lightgray }
+.set-the-best-answer-link { background-color: lightblue; }
+.edit-answer-link { background-color: lightblue; }
+.delete-answer-link { background-color: lightblue; }
+.answer_body { min-height: 50px; }
+
+

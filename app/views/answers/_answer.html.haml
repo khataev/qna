@@ -10,15 +10,14 @@
         = render 'attachments/attachments', attachable: answer
 
         .answer_links
-          %ul
           - if can? :set_best, answer
-            %li= link_to  (answer.best? ? 'Revert' : 'Make the Best'), set_best_answer_path(answer), method: :patch, remote: true
+            = link_to  (answer.best? ? 'Revert' : 'Make the Best'), set_best_answer_path(answer), method: :patch, remote: true, class: 'set-the-best-answer-link'
 
           - if can? :update, answer
-            %li= link_to 'Edit', '', class: 'edit-answer-link', data: { answer_id: answer.id }
+            = link_to 'Edit', '', class: 'edit-answer-link', data: { answer_id: answer.id }
 
           - if can? :destroy, answer
-            %li= link_to 'Delete', answer, method: :delete, data: { confirm: "Are you sure?" }, remote: true
+            = link_to 'Delete', answer, method: :delete, data: { confirm: "Are you sure?" }, remote: true, class: 'delete-answer-link'
             %p
               = form_for answer, remote: true, html: { id: "edit-answer-#{answer.id}" } do |f|
                 = f.label :body, 'Answer'
