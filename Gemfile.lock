@@ -88,9 +88,6 @@ GEM
     capybara-email (2.5.0)
       capybara (~> 2.4)
       mail
-    capybara-webkit (1.11.1)
-      capybara (>= 2.3.0, < 2.8.0)
-      json
     carrierwave (0.11.2)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
@@ -100,6 +97,7 @@ GEM
     childprocess (0.5.9)
       ffi (~> 1.0, >= 1.0.11)
     chronic (0.10.2)
+    cliver (0.3.2)
     cocoon (1.2.9)
     coderay (1.1.1)
     coffee-rails (4.1.1)
@@ -250,6 +248,10 @@ GEM
     orm_adapter (0.5.0)
     pg (0.18.4)
     pkg-config (1.1.7)
+    poltergeist (1.13.0)
+      capybara (~> 2.1)
+      cliver (~> 0.3.1)
+      websocket-driver (>= 0.2.0)
     private_pub (1.0.3)
       faye
     pry (0.10.3)
@@ -446,7 +448,6 @@ DEPENDENCIES
   capistrano3-unicorn
   capybara
   capybara-email
-  capybara-webkit
   carrierwave
   cocoon
   coffee-rails (~> 4.1.0)
@@ -471,6 +472,7 @@ DEPENDENCIES
   omniauth-facebook
   omniauth-twitter
   pg
+  poltergeist
   private_pub
   pry-byebug
   pry-rails
@@ -498,4 +500,4 @@ DEPENDENCIES
   whenever
 
 BUNDLED WITH
-   1.11.2
+   1.13.6
