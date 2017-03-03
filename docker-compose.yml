@@ -1,0 +1,44 @@
+version: '2'
+
+services:
+  db:
+    image: postgres
+  web:
+    build: .
+#      bash:
+#        script:
+#          - bundle install --without 'development production'
+#    volumes:
+#      - .:/home/code/eq
+#      - ~/docker/eq-drone-ci:/home/code/eq
+    ports:
+      - "3333:3000"
+    links:
+      - db
+#    command: "xvfb-run bundle exec rspec --format doc"
+#    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+#    command: bash -c "bundle exec rake db:drop && bundle exec rake db:create && bundle exec rake db:migrate && xvfb-run bundle exec rspec --format doc"
+    command: bash -c "bundle exec rake db:drop && bundle exec rake db:create && bundle exec rake db:migrate"
+#  drone-server:#    image: drone/drone:0.5
+#    ports:
+#      - 80:8000
+#    volumes:
+#      - ./drone:/var/lib/drone/
+#    restart: always
+#    environment:
+#      - DRONE_OPEN=true
+#      - DRONE_GITHUB=true
+#      - DRONE_GITHUB_CLIENT=${DRONE_GITHUB_CLIENT}
+#      - DRONE_GITHUB_SECRET=${DRONE_GITHUB_SECRET}
+#      - DRONE_SECRET=${DRONE_SECRET}
+#
+#  drone-agent:
+#    image: drone/drone:0.5
+#    command: agent
+#    restart: always
+#    depends_on: [ drone-server ]
+#    volumes:
+#      - /var/run/docker.sock:/var/run/docker.sock
+#    environment:
+#      - DRONE_SERVER=ws://drone-server:8000/ws/broker
+#      - DRONE_SECRET=${DRONE_SECRET}

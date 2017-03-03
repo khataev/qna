@@ -88,7 +88,6 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'bullet'
-  gem 'capybara-webkit'
   gem 'database_cleaner'
   gem 'selenium-webdriver'
   gem 'quiet_assets'
@@ -99,6 +98,7 @@ group :test do
   gem 'shoulda-matchers'
   gem 'capybara'
   gem 'json_spec'
+  gem 'poltergeist'
   # Acces an IRB console on exception pages or by using <%= console %> in views
   # gem 'web-console', '~> 2.0'
 end

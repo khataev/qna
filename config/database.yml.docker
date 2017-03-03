@@ -1,0 +1,8 @@
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: qna_test
+  pool: 5
+  username: postgres
+  password:
+  host: db
