@@ -28,7 +28,10 @@ RUN apt-get update -y && apt-get install -y \
     libfontconfig1 \
     libfontconfig1-dev \
     vim \
-    nano
+    nano \
+
+    # mysql
+    libmysqlclient-dev
 
 # Set the timezone.
 RUN echo "Europe/Moscow" > /etc/timezone
