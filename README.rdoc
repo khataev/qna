@@ -2,6 +2,8 @@
 
 {<img src="https://travis-ci.org/khataev/qna.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/khataev/qna]
 
+{<img src="http://7thheaven.myds.me/api/badges/khataev/qna/status.svg" alt="Build Status" />}[http://7thheaven.myds.me/khataev/qna]
+
 Мой учебный проект по курсу профессиональная разработка на Ruby on Rails в школе Thinknetica http://thinknetica.com/ror_advanced
 
 Демо http://7thheaven.myds.me:4000
