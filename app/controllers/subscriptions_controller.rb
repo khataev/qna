@@ -30,4 +30,5 @@ class SubscriptionsController < ApplicationController
   def load_subscription
     @subscription = Subscription.find(params[:id])
   end
+  
 end
