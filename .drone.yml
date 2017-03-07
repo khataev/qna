@@ -9,3 +9,4 @@ pipeline:
       - bundle exec rspec
     when:
       branch: master
+      # comment
