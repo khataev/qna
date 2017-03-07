@@ -2,6 +2,8 @@ pipeline:
   build:
     image: rails-qna
     commands: 
+      - echo 123
+      - ls /drone/src/github.com/khataev/qna
       - bundle exec rake db:drop
       - bundle exec rake db:create
       - bundle exec rake db:migrate
