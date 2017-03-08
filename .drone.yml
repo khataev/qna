@@ -9,4 +9,6 @@ pipeline:
       - bundle exec rspec
     when:
       branch: master
-# commit
+services:
+  db:
+    image: postgres
